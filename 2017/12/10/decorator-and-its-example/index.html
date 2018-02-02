@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>装饰器及其相关实例 | 小狒sin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1. 装饰器的概念1-0. 前言装饰器 (Decorator) 是 ES2017 中的一个提案，装饰器的出现，给我们在多个不同类之间共享或者扩展一些方法或者行为的时候，提供了一种更加优雅的方法。 1-1. 什么是装饰器简单的说，修饰器就是一个对类进行处理的函数，可以给类以及类的方法添加一些行为，而又不改变其代码。在 Python 中，对于 装饰器 (Decorator) 是这样定义的：  A Py">
+<meta name="keywords" content="ES6,javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="装饰器及其相关实例">
+<meta property="og:url" content="http://yoursite.com/2017/12/10/decorator-and-its-example/index.html">
+<meta property="og:site_name" content="小狒sin">
+<meta property="og:description" content="1. 装饰器的概念1-0. 前言装饰器 (Decorator) 是 ES2017 中的一个提案，装饰器的出现，给我们在多个不同类之间共享或者扩展一些方法或者行为的时候，提供了一种更加优雅的方法。 1-1. 什么是装饰器简单的说，修饰器就是一个对类进行处理的函数，可以给类以及类的方法添加一些行为，而又不改变其代码。在 Python 中，对于 装饰器 (Decorator) 是这样定义的：  A Py">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-02-02T11:44:36.569Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="装饰器及其相关实例">
+<meta name="twitter:description" content="1. 装饰器的概念1-0. 前言装饰器 (Decorator) 是 ES2017 中的一个提案，装饰器的出现，给我们在多个不同类之间共享或者扩展一些方法或者行为的时候，提供了一种更加优雅的方法。 1-1. 什么是装饰器简单的说，修饰器就是一个对类进行处理的函数，可以给类以及类的方法添加一些行为，而又不改变其代码。在 Python 中，对于 装饰器 (Decorator) 是这样定义的：  A Py">
+  
+    <link rel="alternative" href="/atom.xml" title="小狒sin" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xokdi.com1.z0.glb.clouddn.com/avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Sinker</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">18 Til I Die</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/s1nker" title="github">github</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/sin-chaw" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="mailto:s1nker@126.com" title="mail">mail</a>
+					        
+								<a class="linkedin" target="_blank" href="https://cn.linkedin.com/in/s1nker" title="linkedin">linkedin</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/ES6/" style="font-size: 15px;">ES6</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/Safari/" style="font-size: 10px;">Safari</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/development-docs/" style="font-size: 10px;">development docs</a> <a href="/tags/feeling/" style="font-size: 10px;">feeling</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/js对象/" style="font-size: 10px;">js对象</a> <a href="/tags/life/" style="font-size: 15px;">life</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/作用域/" style="font-size: 10px;">作用域</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/深拷贝/" style="font-size: 10px;">深拷贝</a> <a href="/tags/组件封装/" style="font-size: 10px;">组件封装</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">热爱分享，乐于折腾的前端程序猿，脑洞有点大！</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Sinker</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xokdi.com1.z0.glb.clouddn.com/avatar.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Sinker</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">18 Til I Die</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/s1nker" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/sin-chaw" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="mailto:s1nker@126.com" title="mail">mail</a>
+			        
+						<a class="linkedin" target="_blank" href="https://cn.linkedin.com/in/s1nker" title="linkedin">linkedin</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-decorator-and-its-example" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/12/10/decorator-and-its-example/" class="article-date">
+  	<time datetime="2017-12-09T16:00:00.000Z" itemprop="datePublished">2017-12-10</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      装饰器及其相关实例
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/">ES6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-装饰器的概念"><a href="#1-装饰器的概念" class="headerlink" title="1. 装饰器的概念"></a>1. 装饰器的概念</h2><h3 id="1-0-前言"><a href="#1-0-前言" class="headerlink" title="1-0. 前言"></a>1-0. 前言</h3><p>装饰器 (Decorator) 是 ES2017 中的一个<a href="https://tc39.github.io/proposal-decorators/" target="_blank" rel="external">提案</a>，装饰器的出现，给我们在多个不同类之间共享或者扩展一些方法或者行为的时候，提供了一种更加优雅的方法。</p>
+<h3 id="1-1-什么是装饰器"><a href="#1-1-什么是装饰器" class="headerlink" title="1-1. 什么是装饰器"></a>1-1. 什么是装饰器</h3><p>简单的说，修饰器就是一个对类进行处理的函数，可以给类以及类的方法添加一些行为，而又不改变其代码。<br>在 Python 中，对于 装饰器 (Decorator) 是这样定义的：</p>
+<blockquote>
+<p>A Python decorator is a function that takes another function, extending the behavior of the latter function without explicitly modifying it.<br>Python 装饰器是接受另一个函数作为参数的函数，扩展参数函数行为的同时并没有修改参数函数本身。</p>
+</blockquote>
+<p>我们通过一个简单的例子来说明装饰器是什么，以下代码是一个给类添加属性 <code>isTestable</code> 的装饰器，通过 <code>@testable</code> 这样的调用，可以给类增加一个 <code>isTestable = true</code> 的属性。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">@testable</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyTestableClass</span> </span>&#123;</div><div class="line">  <span class="comment">// ...</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">testable</span>(<span class="params">target</span>) </span>&#123;</div><div class="line">  target.isTestable = <span class="literal">true</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">MyTestableClass.isTestable <span class="comment">// true</span></div></pre></td></tr></table></figure>
+<h3 id="1-2-设计模式-装饰模式"><a href="#1-2-设计模式-装饰模式" class="headerlink" title="1-2. 设计模式: 装饰模式"></a>1-2. 设计模式: 装饰模式</h3><p>装饰模式是 <em>包装模式 (Wrapper Pattern)</em> 的一种，同为包装模式的还有适配器模式。装饰模式以对客户端透明的方式扩展对象的功能，是继承关系的一个替代方案。</p>
+<p>装饰模式的设计模式是为了动态地给一个对象增加额外的行为，单就增加功能来说，装饰模式要比生成子类的方式更加灵活。遇到符合下面描述的情况时，可以考虑使用装饰模式：</p>
+<ul>
+<li>需要扩展一个类的功能，或者给一个类增加属性</li>
+<li>需要动态的给一个对象增加功能，这些功能需要动态的撤销</li>
+<li>需要增加一些基本功能的排列组合而产生的非常大量的功能，从而使继承变得不现实</li>
+</ul>
+<h2 id="2-ES6-中的装饰器"><a href="#2-ES6-中的装饰器" class="headerlink" title="2. ES6 中的装饰器"></a>2. ES6 中的装饰器</h2><p>ES6 中装饰器使用特殊的语法，使用 <code>@</code> 作为标识符，且放置在被装饰代码之前。一个类可以被多个不同的装饰器装饰，在代码进行编译的时候，按照顺序相应执行。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">@log()</div><div class="line">@immutable()</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Example</span> </span>&#123;</div><div class="line">  @time(<span class="string">'demo'</span>)</div><div class="line">  doSomething() &#123;</div><div class="line"></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>此外，装饰器对于类的行为的改变，是在代码编译的时候发生的，并不是在运行时。这意味着，修饰器能在编译阶段运行代码。也就是说，修饰器本质就是编译时执行的函数。</p>
+<h3 id="2-1-关于-Object-defineProperty"><a href="#2-1-关于-Object-defineProperty" class="headerlink" title="2-1. 关于 Object.defineProperty"></a>2-1. 关于 <code>Object.defineProperty</code></h3><p>ES6 中的装饰器依赖于 ES5 中的 <code>Object.defineProperty</code>，<code>Object.defineProperty</code> 方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性， 并返回这个对象。</p>
+<p><code>Object.defineProperty</code> 的语法如下：</p>
+<blockquote>
+<p>Object.defineProperty(obj, prop, descriptor)</p>
+</blockquote>
+<p>参数 <code>obj</code> 为要在其上定义属性的对象，<code>prop</code> 为要定义或者修改的属性的名称，<code>descripor</code> 为将被定义或修改的属性描述符，对于属性描述符有哪些，可以看<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty" target="_blank" rel="external">这里</a>。<br>该方法返回被传递给函数的对象。</p>
+<p><code>Object.defineProperty</code>允许精确添加或修改对象的属性。通过赋值来添加的普通属性会创建在属性枚举期间显示的属性（ <code>for...in</code> 或 <code>Object.keys</code> 方法）， 这些值可以被改变，也可以被删除。这种方法允许这些额外的细节从默认值改变。默认情况下，使用 <code>Object.defineProperty()</code> 添加的属性值是不可变的。</p>
+<h3 id="2-2-装饰器的使用"><a href="#2-2-装饰器的使用" class="headerlink" title="2-2. 装饰器的使用"></a>2-2. 装饰器的使用</h3><p>接下来我们通过几个简单的例子来看看，如何使用 ES6 提供的语法糖。</p>
+<h4 id="2-2-1-对类的装饰器"><a href="#2-2-1-对类的装饰器" class="headerlink" title="2-2-1. 对类的装饰器"></a>2-2-1. 对类的装饰器</h4><p>像我们在 1-1 中举的例子 <code>testable</code> 就是一个对类进行装饰的例子，这个例子可以用带参数的方法实现，类似于工厂方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">testable</span>(<span class="params">isTestable</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">target</span>) </span>&#123;</div><div class="line">    target.isTestable = isTestable;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@testable(<span class="literal">true</span>)</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyTestableClass</span> </span>&#123;&#125;</div><div class="line">MyTestableClass.isTestable <span class="comment">// true</span></div><div class="line"></div><div class="line">@testable(<span class="literal">false</span>)</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span> </span>&#123;&#125;</div><div class="line">MyClass.isTestable <span class="comment">// false</span></div></pre></td></tr></table></figure>
+<p>前面的例子是为类添加一个静态属性，如果想添加实例属性，可以通过目标类的prototype对象操作。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">testable</span>(<span class="params">target</span>) </span>&#123;</div><div class="line">  target.prototype.isTestable = <span class="literal">true</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@testable</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyTestableClass</span> </span>&#123;&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> obj = <span class="keyword">new</span> MyTestableClass();</div><div class="line">obj.isTestable <span class="comment">// true</span></div></pre></td></tr></table></figure>
+<h4 id="2-2-2-对类属性的装饰器"><a href="#2-2-2-对类属性的装饰器" class="headerlink" title="2-2-2. 对类属性的装饰器"></a>2-2-2. 对类属性的装饰器</h4><p>类属性装饰器适用于类的单独成员，接收三个参数：</p>
+<ul>
+<li><code>target</code> 被修饰的类</li>
+<li><code>name</code> 要修饰的类成员的名字</li>
+<li><code>descriptor</code> 要修饰的类成员的描述符</li>
+</ul>
+<p>可以看到接收参数与 <code>Object.defineProperty</code> 完全类似。</p>
+<p>对于类属性的装饰，可以先看一个非常常见的只读实例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">readonly</span>(<span class="params">target, name, descriptor</span>) </span>&#123;</div><div class="line">  discriptor.writable = <span class="literal">false</span>;</div><div class="line">  <span class="keyword">return</span> discriptor;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cat</span> </span>&#123;</div><div class="line">  @readonly</div><div class="line">  say() &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"meow"</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> wangcai = <span class="keyword">new</span> Cat();</div><div class="line">wangcai.say = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">"woof"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// Exception: Attempted to assign to readonly property</span></div></pre></td></tr></table></figure>
+<p>可以看到对 <code>wangcai</code> 的 <code>say</code> 方法进行修改并没有生效，此时 <code>Cat</code> 对象的 <code>say</code> 方法是只读的，不可被赋值表达式改变。</p>
+<h4 id="2-2-3-装饰器用于函数"><a href="#2-2-3-装饰器用于函数" class="headerlink" title="2-2-3. 装饰器用于函数"></a>2-2-3. 装饰器用于函数</h4><p>从上文中我们知道，实际上装饰器在代码编译时就运行了，存在函数提升，可以看下面的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> counter = <span class="number">0</span>;</div><div class="line"></div><div class="line"><span class="keyword">var</span> add = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  counter++;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">@add</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>由于函数提升的存在，实际执行的代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">@add</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> counter;</div><div class="line"><span class="keyword">var</span> add;</div><div class="line"></div><div class="line">counter = <span class="number">0</span>;</div><div class="line"></div><div class="line">add = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  counter++;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>我们想让 <code>counter</code> 输出为 1 ,而<code>counter</code> 在最后给赋值了 0。</p>
+<h2 id="3-应用实例"><a href="#3-应用实例" class="headerlink" title="3. 应用实例"></a>3. 应用实例</h2><h3 id="3-1-debounce-去抖动"><a href="#3-1-debounce-去抖动" class="headerlink" title="3-1. debounce (去抖动)"></a>3-1. debounce (去抖动)</h3><p>函数执行次数过于频繁导致性能问题的时候，debounce (去抖动) 可以节约性能提高用户体验。debounce (去抖动)的定义是：</p>
+<blockquote>
+<p>如果用手指一直按住一个弹簧，它将不会弹起直到你松手为止。</p>
+</blockquote>
+<p>去抖动通过限制函数执行次数，来提高用户体验。当调用动作 n 毫秒后，才会执行该动作，若在这 n 毫秒内又调用此动作则将重新计算执行时间。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// core-decorators/src/debounce.js</span></div><div class="line"><span class="keyword">import</span> &#123; decorate, metaFor, internalDeprecation &#125; <span class="keyword">from</span> <span class="string">'./private/utils'</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> DEFAULT_TIMEOUT = <span class="number">300</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleDescriptor</span>(<span class="params">target, key, descriptor, [wait = DEFAULT_TIMEOUT, immediate = false]</span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> callback = descriptor.value;</div><div class="line"></div><div class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> callback !== <span class="string">'function'</span>) &#123;</div><div class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">SyntaxError</span>(<span class="string">'Only functions can be debounced'</span>);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">return</span> &#123;</div><div class="line">    ...descriptor,</div><div class="line">    value() &#123;</div><div class="line">      <span class="keyword">const</span> &#123; debounceTimeoutIds &#125; = metaFor(<span class="keyword">this</span>); <span class="comment">// 每个 debounce 使用独立的计时器</span></div><div class="line">      <span class="keyword">const</span> timeout = debounceTimeoutIds[key];</div><div class="line">      <span class="keyword">const</span> callNow = immediate &amp;&amp; !timeout;</div><div class="line">      <span class="keyword">const</span> args = <span class="built_in">arguments</span>;</div><div class="line"></div><div class="line">      clearTimeout(timeout);</div><div class="line"></div><div class="line">      debounceTimeoutIds[key] = setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">        <span class="keyword">delete</span> debounceTimeoutIds[key];</div><div class="line">        <span class="keyword">if</span> (!immediate) &#123;</div><div class="line">          callback.apply(<span class="keyword">this</span>, args);</div><div class="line">        &#125;</div><div class="line">      &#125;, wait);</div><div class="line"></div><div class="line">      <span class="keyword">if</span> (callNow) &#123;</div><div class="line">        callback.apply(<span class="keyword">this</span>, args);</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">...args</span>) </span>&#123;</div><div class="line">  internalDeprecation(<span class="string">'@debounce is deprecated and will be removed shortly. Use @debounce from lodash-decorators.\n\n  https://www.npmjs.com/package/lodash-decorators'</span>);</div><div class="line">  <span class="keyword">return</span> decorate(handleDescriptor, args);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="3-2-混入-Mixin"><a href="#3-2-混入-Mixin" class="headerlink" title="3-2. 混入 (Mixin)"></a>3-2. 混入 (Mixin)</h3><p>混入 (Mixin) 所作的事情即枚举出一个或者多个对象的所有属性，然后将这些属性添加到另一个对象上去。</p>
+<p>而实际上 jQuery 中的 <code>jQuery.extend</code>和 lodash 中的 <code>_.mixin</code> 通过不同的调用形式都实现了混入 (Mixin)。</p>
+<p>依赖于 <code>Object.assign</code> 我们可以用装饰器的方式实现实现混入 (Mixin)：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">mixins</span>(<span class="params">...list</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">target</span>) </span>&#123;</div><div class="line">    <span class="built_in">Object</span>.assign(target.prototype, ...list);</div><div class="line">  &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">const</span> Foo = &#123;</div><div class="line">  foo() &#123; <span class="built_in">console</span>.log(<span class="string">'foo'</span>) &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">@mixins(Foo)</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span> </span>&#123;&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> obj = <span class="keyword">new</span> MyClass();</div><div class="line">obj.foo() <span class="comment">// "foo"</span></div></pre></td></tr></table></figure>
+<h3 id="3-3-简单的日志系统"><a href="#3-3-简单的日志系统" class="headerlink" title="3-3. 简单的日志系统"></a>3-3. 简单的日志系统</h3><p>通过在给类执行前后增加输出的处理，可以实现监控类行为的功能：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> log = <span class="function">(<span class="params">type</span>) =&gt;</span> &#123;</div><div class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">target, name, descriptor</span>) =&gt;</span> &#123;</div><div class="line">    <span class="keyword">const</span> method = descriptor.value;</div><div class="line">    descriptor.value =  <span class="function">(<span class="params">...args</span>) =&gt;</span> &#123;</div><div class="line">      <span class="built_in">console</span>.info(<span class="string">`(<span class="subst">$&#123;type&#125;</span>) 正在执行: <span class="subst">$&#123;name&#125;</span>(<span class="subst">$&#123;args&#125;</span>) = ?`</span>);</div><div class="line">      <span class="keyword">let</span> ret;</div><div class="line">      <span class="keyword">try</span> &#123;</div><div class="line">        ret = method.apply(target, args);</div><div class="line">        <span class="built_in">console</span>.info(<span class="string">`(<span class="subst">$&#123;type&#125;</span>) 成功 : <span class="subst">$&#123;name&#125;</span>(<span class="subst">$&#123;args&#125;</span>) =&gt; <span class="subst">$&#123;ret&#125;</span>`</span>);</div><div class="line">      &#125; <span class="keyword">catch</span> (error) &#123;</div><div class="line">        <span class="built_in">console</span>.error(<span class="string">`(<span class="subst">$&#123;type&#125;</span>) 失败: <span class="subst">$&#123;name&#125;</span>(<span class="subst">$&#123;args&#125;</span>) =&gt; <span class="subst">$&#123;error&#125;</span>`</span>);</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">return</span> ret;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">IronMan</span> </span>&#123;</div><div class="line">  @log(<span class="string">'IronMan 自检阶段'</span>)</div><div class="line">  check()&#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">'检查完毕'</span>;</div><div class="line">  &#125;</div><div class="line">  @log(<span class="string">'IronMan 攻击阶段'</span>)</div><div class="line">  attack()&#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">'击倒敌人'</span>;</div><div class="line">  &#125;</div><div class="line">  @log(<span class="string">'IronMan 机体报错'</span>)</div><div class="line">  error()&#123;</div><div class="line">    <span class="keyword">throw</span> <span class="string">'Something is wrong!'</span>;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> tony = <span class="keyword">new</span> IronMan();</div><div class="line">tony.check();</div><div class="line">tony.attack();</div><div class="line">tony.error();</div><div class="line"></div><div class="line"><span class="comment">// (IronMan 自检阶段) 正在执行: check() = ?</span></div><div class="line"><span class="comment">// (IronMan 自检阶段) 成功 : check() =&gt; 检查完毕</span></div><div class="line"><span class="comment">// (IronMan 攻击阶段) 正在执行: attack() = ?</span></div><div class="line"><span class="comment">// (IronMan 攻击阶段) 成功 : attack() =&gt; 击倒敌人</span></div><div class="line"><span class="comment">// (IronMan 机体报错) 正在执行: error() = ?</span></div><div class="line"><span class="comment">// (IronMan 机体报错) 失败: error() =&gt; Something is wrong!</span></div></pre></td></tr></table></figure>
+<h2 id="4-通过-Babel-使用"><a href="#4-通过-Babel-使用" class="headerlink" title="4. 通过 Babel 使用"></a>4. 通过 Babel 使用</h2><p>使用 npm 安装 babel-plugin-transform-decorators-legacy 插件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install babel-plugin-transform-decorators-legacy --save-dev</div></pre></td></tr></table></figure>
+<p>配置 <code>.babelrc</code> 文件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">"plugins"</span>: [<span class="string">"transform-decorators-legacy"</span>]</div></pre></td></tr></table></figure>
+<p>参考资料：</p>
+<ul>
+<li><a href="https://tc39.github.io/proposal-decorators/" target="_blank" rel="external">Decorators proposal</a></li>
+<li><a href="http://es6.ruanyifeng.com/#docs/decorator#类的修饰" target="_blank" rel="external">修饰器 - ECMAScripe 6入门</a></li>
+<li><a href="https://www.sitepoint.com/javascript-decorators-what-they-are/" target="_blank" rel="external">JavaScript Decorators: What They Are and When to Use Them</a></li>
+<li><a href="http://blog.csdn.net/zhshulin/article/details/38665187" target="_blank" rel="external">设计模式——装饰模式（Decorator）</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty" target="_blank" rel="external">Object.defineProperty() - Javaecript | MDN</a></li>
+<li><a href="http://taobaofed.org/blog/2015/11/16/es7-decorator/" target="_blank" rel="external">ES7 Decorator 装饰者模式</a></li>
+<li><a href="https://jinlong.github.io/2016/04/24/Debouncing-and-Throttling-Explained-Through-Examples/" target="_blank" rel="external">实例解析防抖动（Debouncing）和节流阀（Throttling）</a></li>
+<li><a href="https://github.com/lodash/lodash/blob/4.7.0/lodash.js" target="_blank" rel="external">lodash/lodash.js</a></li>
+<li><a href="https://github.com/jayphelps/core-decorators/blob/master/src/debounce.js" target="_blank" rel="external">core-decorators/src/debounce.js</a></li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/01/31/hack-ios-11-n-iphone-X/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          iOS 11 及 iPhone X 爬坑姿势
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/01/deep-copy-and-shallow-copy/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">简析 javascript 中的深拷贝和浅拷贝</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="decorator-and-its-example" data-title="装饰器及其相关实例" data-url="http://yoursite.com/2017/12/10/decorator-and-its-example/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2018 Sinker
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

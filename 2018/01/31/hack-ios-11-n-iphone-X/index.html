@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>iOS 11 及 iPhone X 爬坑姿势 | 小狒sin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1 序言2017 年 9 月 12 日凌晨，苹果在乔布斯剧院发布了 iPhone X。iPhone X 正面的全面屏上方有一条刘海，对于如何适配 iPhone X，苹果的 Human Interface Guidelines 文档有给出相关的说明，但是对于前端开发者来说，我们还应该关注到更多的东西。 iOS 11 新引入了若干个 Webkit API 来解决带来的适配问题，使用这些新的 API 我">
+<meta name="keywords" content="javascript,CSS,iOS,Safari">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 11 及 iPhone X 爬坑姿势">
+<meta property="og:url" content="http://yoursite.com/2018/01/31/hack-ios-11-n-iphone-X/index.html">
+<meta property="og:site_name" content="小狒sin">
+<meta property="og:description" content="1 序言2017 年 9 月 12 日凌晨，苹果在乔布斯剧院发布了 iPhone X。iPhone X 正面的全面屏上方有一条刘海，对于如何适配 iPhone X，苹果的 Human Interface Guidelines 文档有给出相关的说明，但是对于前端开发者来说，我们还应该关注到更多的东西。 iOS 11 新引入了若干个 Webkit API 来解决带来的适配问题，使用这些新的 API 我">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://7xokdi.com1.z0.glb.clouddn.com/safe_area_1.png">
+<meta property="og:image" content="http://7xokdi.com1.z0.glb.clouddn.com/safe_area_2.png">
+<meta property="og:image" content="http://7xokdi.com1.z0.glb.clouddn.com/clipped_area.png">
+<meta property="og:image" content="http://7xokdi.com1.z0.glb.clouddn.com/viewport_fit_contain.png">
+<meta property="og:image" content="http://7xokdi.com1.z0.glb.clouddn.com/viewport_fit_cover.png">
+<meta property="og:image" content="http://7xokdi.com1.z0.glb.clouddn.com/iphone_x_with_white_wings.png">
+<meta property="og:image" content="http://7xokdi.com1.z0.glb.clouddn.com/iphone_x_with_viewport_fit_cover.png">
+<meta property="og:image" content="http://7xokdi.com1.z0.glb.clouddn.com/iphone_x_with_viewport_fit_cover_constant.png">
+<meta property="og:image" content="http://7xokdi.com1.z0.glb.clouddn.com/theme_color.png">
+<meta property="og:image" content="http://7xokdi.com1.z0.glb.clouddn.com/sharp_outside.gif">
+<meta property="og:updated_time" content="2018-02-02T11:48:31.609Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS 11 及 iPhone X 爬坑姿势">
+<meta name="twitter:description" content="1 序言2017 年 9 月 12 日凌晨，苹果在乔布斯剧院发布了 iPhone X。iPhone X 正面的全面屏上方有一条刘海，对于如何适配 iPhone X，苹果的 Human Interface Guidelines 文档有给出相关的说明，但是对于前端开发者来说，我们还应该关注到更多的东西。 iOS 11 新引入了若干个 Webkit API 来解决带来的适配问题，使用这些新的 API 我">
+<meta name="twitter:image" content="http://7xokdi.com1.z0.glb.clouddn.com/safe_area_1.png">
+  
+    <link rel="alternative" href="/atom.xml" title="小狒sin" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xokdi.com1.z0.glb.clouddn.com/avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Sinker</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">18 Til I Die</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/s1nker" title="github">github</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/sin-chaw" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="mailto:s1nker@126.com" title="mail">mail</a>
+					        
+								<a class="linkedin" target="_blank" href="https://cn.linkedin.com/in/s1nker" title="linkedin">linkedin</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/ES6/" style="font-size: 15px;">ES6</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/Safari/" style="font-size: 10px;">Safari</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/development-docs/" style="font-size: 10px;">development docs</a> <a href="/tags/feeling/" style="font-size: 10px;">feeling</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/js对象/" style="font-size: 10px;">js对象</a> <a href="/tags/life/" style="font-size: 15px;">life</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/作用域/" style="font-size: 10px;">作用域</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/深拷贝/" style="font-size: 10px;">深拷贝</a> <a href="/tags/组件封装/" style="font-size: 10px;">组件封装</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">热爱分享，乐于折腾的前端程序猿，脑洞有点大！</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Sinker</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xokdi.com1.z0.glb.clouddn.com/avatar.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Sinker</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">18 Til I Die</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/s1nker" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/sin-chaw" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="mailto:s1nker@126.com" title="mail">mail</a>
+			        
+						<a class="linkedin" target="_blank" href="https://cn.linkedin.com/in/s1nker" title="linkedin">linkedin</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-hack-ios-11-n-iphone-X" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/01/31/hack-ios-11-n-iphone-X/" class="article-date">
+  	<time datetime="2018-01-30T16:00:00.000Z" itemprop="datePublished">2018-01-31</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      iOS 11 及 iPhone X 爬坑姿势
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Safari/">Safari</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-序言"><a href="#1-序言" class="headerlink" title="1 序言"></a>1 序言</h2><p>2017 年 9 月 12 日凌晨，苹果在乔布斯剧院发布了 iPhone X。iPhone X 正面的全面屏上方有一条刘海，对于如何适配 iPhone X，苹果的 Human Interface Guidelines 文档有给出相关的说明，但是对于前端开发者来说，我们还应该关注到更多的东西。</p>
+<p>iOS 11 新引入了若干个 Webkit API 来解决带来的适配问题，使用这些新的 API 我们可以更好的利用 iPhone X 屏幕的特性。</p>
+<h2 id="2-相关概念"><a href="#2-相关概念" class="headerlink" title="2 相关概念"></a>2 相关概念</h2><p>在了解新 API 之前需要先了解苹果设备屏幕的相关概念，接下来简单的对之进行说明。</p>
+<h3 id="2-1-安全区域（Safe-Area）"><a href="#2-1-安全区域（Safe-Area）" class="headerlink" title="2.1 安全区域（Safe Area）"></a>2.1 安全区域（Safe Area）</h3><p>在苹果的 <a href="https://developer.apple.com/documentation/uikit/uiview/positioning_content_relative_to_the_safe_area" target="_blank" rel="external">UIKit文档</a> 中，提到了安全区域。</p>
+<p><img src="http://7xokdi.com1.z0.glb.clouddn.com/safe_area_1.png" alt="safe_area_1"></p>
+<p><img src="http://7xokdi.com1.z0.glb.clouddn.com/safe_area_2.png" alt="safe_area_2"></p>
+<p>简单的说，将内容放在这样的 Safe area 可以确保内容不会被设备圆角（corners），传感器外壳（sensor housing，齐刘海）以及底部的 Home Indicator 遮挡。</p>
+<h2 id="3-相关-API"><a href="#3-相关-API" class="headerlink" title="3 相关 API"></a>3 相关 API</h2><h3 id="3-1-viewport-fit"><a href="#3-1-viewport-fit" class="headerlink" title="3.1 viewport-fit"></a>3.1 viewport-fit</h3><h4 id="3-1-1-基础介绍"><a href="#3-1-1-基础介绍" class="headerlink" title="3.1.1 基础介绍"></a>3.1.1 基础介绍</h4><p>iOS 11 与早期的版本有个不同的地方，Webview 内容将会尊重所谓的安全区域。这意味着，如果你有一个标题栏固定在顶部 <code>position: fixed; top: 0</code> 。它将会在屏幕顶部下面的 20px 开始渲染。当你向下滚动时，它会移动到状态栏的后面。当你向上滚动时，它会再次下降到状态栏下面，而且在 20px 的间隙中，内容会透出。在 <a href="https://ayogo.com/blog/ios11-viewport/" target="_blank" rel="external">Understanding the WebView Viewport in iOS 11</a> 这篇文章中的视频可以看到实际是怎么样的。不过这个恼人的问题通过给 <code>viewport-fit</code> 进行配置即可解决。</p>
+<p><code>viewport-fit</code> 可以设置可视窗口（Visual Viewport）的大小。在设备的物理屏幕上看到的初始布局视窗。在圆形屏幕上，当前屏幕上显示的部分是圆形的，但是 Viewport 却是矩形的。因此，根据 Viewport 的大小，页面的某些部可能被剪切。</p>
+<p><img src="http://7xokdi.com1.z0.glb.clouddn.com/clipped_area.png" alt="clipped_area"></p>
+<p><code>viewport-fit</code> 可以设置可视视窗的大小，也就是裁剪区域，<code>viewport-fit</code> 接收以下三个值：</p>
+<ul>
+<li><code>contain</code>：viewport 中可以显示整个页面的内容，也就是说那些 position 设置为 fixed 的元素会相对于 iOS 11 的安全区域定位。<blockquote>
+<p>注意: 设置该属性值时，<code>border-boundary: display</code> 和 <code>shape-inside: display</code> 会失效。</p>
+</blockquote>
+</li>
+<li><code>cover</code>：页面的内容完全覆盖整个 viewport。也就是说那些 <code>position: fixed</code> 的元素会相对于 viewport 定位，这就可能导致页面中有的内容会被遮盖。</li>
+<li><code>auto</code>：默认值，表现与 contain 一致。</li>
+</ul>
+<p><a href="https://drafts.csswg.org/css-round-display/" target="_blank" rel="external">CSS Round Display Level 1</a> 中有给出了一些对于这个属性的建议：</p>
+<blockquote>
+<p>当在非矩形显示器上设置 viewport 的边界框（viewport Bounding Box）大小时，必须考虑以下因素：</p>
+<ul>
+<li>由于 viewport 边界框（viewport Bounding Box）的面积大于显示区域，导致剪切区域</li>
+<li>在 Viewport 边界框和显示区域之间存在间隙</li>
+</ul>
+<p>开发人员可以决定哪一个因素比较重要。如果必须确保 web 页面的没有任何一部分被隐藏，那么避免发生剪裁的优先级要高于处理在 viewport 的边界框和屏幕的边框之间的间隙。如果不想让 web 页面被缩小导致可读性上降低，那么最好将 <code>viewport-fit</code> 设置为 cover ，但是要注意页面被裁剪的部分。</p>
+</blockquote>
+<p>我们直接看规范中给出的例子：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">@<span class="keyword">viewport</span> (viewport-fit: contain) &#123;</div><div class="line">    <span class="comment">/* CSS for the rectangular design */</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://7xokdi.com1.z0.glb.clouddn.com/viewport_fit_contain.png" alt="viewport_fit_contain"></p>
+<p>当将 <code>viewport-fit</code> 设置为 contain 时，viewport 会以显示完整的、最大的矩形页面为依据，去展示 web 内容。在 iPhone X 中可视区域内多余的区域会以白色的背景色显示。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">@<span class="keyword">viewport</span> &#123;</div><div class="line">    <span class="selector-tag">viewport-fit</span>: <span class="selector-tag">cover</span>;</div><div class="line">&#125;</div><div class="line">@<span class="keyword">media</span> (shape: round)&#123;</div><div class="line">    <span class="comment">/* styles for the round design */</span></div><div class="line">&#125;</div><div class="line">@<span class="keyword">media</span> (shape: rect)&#123;</div><div class="line">    <span class="comment">/* styles for the rectangular design */</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://7xokdi.com1.z0.glb.clouddn.com/viewport_fit_cover.png" alt="viewport_fit_cover"></p>
+<p>当将 <code>viewport-fit</code> 设置为 cover 时，初始的 viewport 会受限于非矩形的展示区域，以填满展示区域为依据进行展示。</p>
+<h4 id="3-1-2-实际应用"><a href="#3-1-2-实际应用" class="headerlink" title="3.1.2 实际应用"></a>3.1.2 实际应用</h4><p>使用 <code>viewport-fit</code> 只需在 viewport 的声明中增加 <code>viewport-fit</code> 的配置即可。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0, viewport-fit=cover"</span>/&gt;</span></div></pre></td></tr></table></figure>
+<p>通过给 <code>viewport-fit</code> 设置 cover 可以页面内容充满 iPhone X 的屏幕。下面是不作处理的 iPhone X 打开页面，可以看到有两条白边。</p>
+<p><img src="http://7xokdi.com1.z0.glb.clouddn.com/iphone_x_with_white_wings.png" alt="iphone_x_with_white_wings"></p>
+<p>设置了 viewport-fit 为 cover 之后：</p>
+<p><img src="http://7xokdi.com1.z0.glb.clouddn.com/iphone_x_with_viewport_fit_cover.png" alt="iphone_x_with_viewport_fit_cover"></p>
+<h3 id="3-2-safe-area-inset"><a href="#3-2-safe-area-inset" class="headerlink" title="3.2 safe-area-inset-*"></a>3.2 safe-area-inset-*</h3><h4 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h4><p>新出的 iPhone X 形状不规则，其状态栏的高不再是 20px，而且在摄像头和扬声器的设置下，你的标题栏内容将会完全无法访问到。需要注意的是，这也适用于固定在屏幕底部的页脚，它将被麦克风阻塞。在一开始的关于安全区域的图中就可以看到，底部是有一定区域在 safe area 之外。</p>
+<p>在上面一个小节，通过设置 <code>viewport-fit</code> 我们将页面的内容铺满了整个屏幕，但是可以看到“齐刘海”会将一部分的内容遮挡，如果我们知道屏幕边缘到 safe area 边缘的距离，那就可以通过设置 <code>padding</code> 属性来解决这个问题了。</p>
+<p>在设置 <code>viewport-fit=cover</code> 之后，Web 中会新增四个常量：</p>
+<ul>
+<li><p><code>safe-area-inset-top</code>：可视区域顶部边缘到安全区域的距离（以CSS像素为单位）</p>
+</li>
+<li><p><code>safe-area-inset-right</code>：可视区域最右边到安全区域的距离（以CSS像素为单位）</p>
+</li>
+<li><p><code>safe-area-inset-left</code>：可视区域最左边到安全区域的距离（以CSS像素为单位）</p>
+</li>
+<li><p><code>safe-area-inset-bottom</code>：可视区域底部边缘到安全区域的距离（以CSS像素为单位）</p>
+</li>
+</ul>
+<p>对应地苹果添加了一个方法，将安全区域布局指南暴露给 CSS 。他们添加类似一个CSS的变量概念，叫作 CSS constants 。通过 <code>constant()</code> 就可以获取到上面的几个常量。<br>通过给页面的容器元素增加以下的样式属性：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">padding</span>: <span class="selector-tag">constant</span>(<span class="selector-tag">safe-area-inset-top</span>) <span class="selector-tag">constant</span>(<span class="selector-tag">safe-area-inset-right</span>) <span class="selector-tag">constant</span>(<span class="selector-tag">safe-area-inset-bottom</span>) <span class="selector-tag">constant</span>(<span class="selector-tag">safe-area-inset-left</span>);</div></pre></td></tr></table></figure>
+<p>可以解决内容被遮挡的问题。</p>
+<p><img src="http://7xokdi.com1.z0.glb.clouddn.com/iphone_x_with_viewport_fit_cover_constant.png" alt="iphone_x_with_viewport_fit_cover_constant"></p>
+<p>要注意在 <a href="https://ayogo.com/blog/ios11-viewport/" target="_blank" rel="external">Darryl Pogue 的文章</a>中说到：</p>
+<blockquote>
+<p>Note: iOS 11.0 uses the constant() syntax, but future versions will only support env()!</p>
+</blockquote>
+<p>在 iOS 11 中仍使用 <code>constant()</code>，但是在未来的版本将会抛弃 <code>constant()</code> 改用 <code>env()</code>。对此 Darryl Pogue 给出的一个关于 header 的样式例子如下，简单做了渐进增强。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">header</span> &#123;</div><div class="line">    <span class="attribute">position</span>: fixed;</div><div class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">right</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">44px</span>;</div><div class="line"></div><div class="line">    <span class="comment">/* Status bar height on iOS 10 */</span></div><div class="line">    <span class="attribute">padding-top</span>: <span class="number">20px</span>;</div><div class="line"></div><div class="line">    <span class="comment">/* Status bar height on iOS 11+ */</span></div><div class="line">    <span class="attribute">padding-top</span>: <span class="built_in">constant</span>(safe-area-inset-top);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="3-3-max-amp-min"><a href="#3-3-max-amp-min" class="headerlink" title="3.3 max() &amp; min ()"></a>3.3 max() &amp; min ()</h3><h4 id="3-3-1-基本介绍"><a href="#3-3-1-基本介绍" class="headerlink" title="3.3.1 基本介绍"></a>3.3.1 基本介绍</h4><blockquote>
+<p>max() 和 min() 未当前版本未包含的功能</p>
+</blockquote>
+<p>如果你在网站设计中采用了 <code>safe-area-inset-*</code>，你可能会注意到，除了安全区域插入之外，你还需要指定最小的内填充。在上面页面中，如果我们使用了 <code>constant(safe-area-inset-left)</code>，当设备旋转回垂直方向时，左边的安全插入距离变成了 0px，文本便紧贴着屏幕边缘了。</p>
+<p><code>min()</code> 和 <code>max()</code> 来实现，这两个函数会在未来的 Safari 技术预览版中可用。这两个函数都接受任意数量的参数，并返回最小值或最大值。它们能用在calc()里面，或者彼此嵌套。并且这两个函数都允许使用calc（）作为参数，就像使用数字一样。</p>
+<h4 id="3-3-2-实际应用"><a href="#3-3-2-实际应用" class="headerlink" title="3.3.2 实际应用"></a>3.3.2 实际应用</h4><p>在处理左右边距时使用max()：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">@supports(padding: max(0px)) &#123;</div><div class="line">    <span class="selector-class">.post</span> &#123;</div><div class="line">        <span class="attribute">padding-left</span>: <span class="built_in">max</span>(12px, constant(safe-area-inset-left));</div><div class="line">        <span class="attribute">padding-right</span>: <span class="built_in">max</span>(12px, constant(safe-area-inset-right));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>使用 <code>@support()</code> 做功能检测很必要。</p>
+</blockquote>
+<h3 id="3-4-theme-color"><a href="#3-4-theme-color" class="headerlink" title="3.4 theme color"></a>3.4 theme color</h3><p>iPhone X 在 portrait 模式下（竖屏）状态栏和 URL 地址栏会有一定的透明度，所以他们会显示半透明的网页背景色。</p>
+<p><img src="http://7xokdi.com1.z0.glb.clouddn.com/theme_color.png" alt="theme_color"></p>
+<p>通过声明 <code>theme-color</code> 即可：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"theme-color"</span> <span class="attr">content</span>=<span class="string">"#676767"</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="4-简单的总结"><a href="#4-简单的总结" class="headerlink" title="4 简单的总结"></a>4 简单的总结</h2><p>本文提及的 API：</p>
+<ul>
+<li><code>viewport-fit</code>：有 <code>contain</code>、<code>cover</code> 和 <code>auto</code> 三个取值。</li>
+<li><code>safe-area-inset-*</code>：与 safe area 有关的几个常量，在设置 <code>viewport-fit=cover</code> 后可以使用</li>
+<li><code>max()</code> 和 <code>min()</code>：在 CSS 中便利地获取最大值和最小值</li>
+</ul>
+<h2 id="5-补充扩展"><a href="#5-补充扩展" class="headerlink" title="5 补充扩展"></a>5 补充扩展</h2><p>显然除了使用以上的 API 去适配 iPhone X，还会有其他情况要使用别的适配方式。</p>
+<p><img src="http://7xokdi.com1.z0.glb.clouddn.com/sharp_outside.gif" alt="sharp_outside"></p>
+<p>在张鑫旭大佬的<a href="http://www.zhangxinxu.com/wordpress/2017/09/css-shapes-outside-iphone-x-head/" target="_blank" rel="external">这篇文章</a>中有讲到这种效果如何实现，可以了解一下。</p>
+<p>参考资料</p>
+<ul>
+<li><a href="https://drafts.csswg.org/css-round-display" target="_blank" rel="external">CSS Round Display Level 1</a></li>
+<li><a href="https://ayogo.com/blog/ios11-viewport/" target="_blank" rel="external">Understanding the WebView Viewport in iOS 11</a></li>
+<li><a href="https://developer.apple.com/documentation/uikit/uiview/positioning_content_relative_to_the_safe_area" target="_blank" rel="external">Positioning Content Relative to the Safe Area</a></li>
+<li><a href="http://web.jobbole.com/92448/" target="_blank" rel="external">iPhone X的缺口和CSS</a></li>
+<li><a href="http://www.zhangxinxu.com/wordpress/2017/09/css-shapes-outside-iphone-x-head/" target="_blank" rel="external">借助CSS Shapes实现元素滚动自动环绕iPhone X的刘海</a></li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/12/10/decorator-and-its-example/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">装饰器及其相关实例</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="hack-ios-11-n-iphone-X" data-title="iOS 11 及 iPhone X 爬坑姿势" data-url="http://yoursite.com/2018/01/31/hack-ios-11-n-iphone-X/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2018 Sinker
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>用CSS画一个自己的初音 | 小狒sin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="某天在写元素的圆角时突然想起，前阵子看了CSS Screct一部分(Github地址)，在线可以试读一部分。试读的章节说到了可以用CSS3的一些新特性画出一些非常奇特的形状，这提醒了我：  可以画出更加生动的东西吧！于是尝试一下画一个Q版的初音未来，先上预览图：  或者可以直接戳链接。 接下来我简单就图案的几个值得说明的地方来讲解下… 1. 弯弯的呆毛 其实这个很简单，只用到了border-rad">
+<meta name="keywords" content="css">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用CSS画一个自己的初音">
+<meta property="og:url" content="http://yoursite.com/2016/03/31/draw-miku-using-css/index.html">
+<meta property="og:site_name" content="小狒sin">
+<meta property="og:description" content="某天在写元素的圆角时突然想起，前阵子看了CSS Screct一部分(Github地址)，在线可以试读一部分。试读的章节说到了可以用CSS3的一些新特性画出一些非常奇特的形状，这提醒了我：  可以画出更加生动的东西吧！于是尝试一下画一个Q版的初音未来，先上预览图：  或者可以直接戳链接。 接下来我简单就图案的几个值得说明的地方来讲解下… 1. 弯弯的呆毛 其实这个很简单，只用到了border-rad">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://7xokdi.com1.z0.glb.clouddn.com/miku%2Frealize-something.gif">
+<meta property="og:image" content="http://7xokdi.com1.z0.glb.clouddn.com/miku%2Fmiku-preview.png">
+<meta property="og:image" content="http://7xokdi.com1.z0.glb.clouddn.com/miku%2Ffringe.png">
+<meta property="og:image" content="http://7xokdi.com1.z0.glb.clouddn.com/miku%2Fhead.png">
+<meta property="og:image" content="http://7xokdi.com1.z0.glb.clouddn.com/miku%2Fmouth.png">
+<meta property="og:image" content="http://yoursite.com/2016/03/31/draw-miku-using-css/index.html">
+<meta property="og:image" content="http://7xokdi.com1.z0.glb.clouddn.com/miku%2Ftie.png">
+<meta property="og:image" content="http://7xokdi.com1.z0.glb.clouddn.com/miku%2Fhairpin.png">
+<meta property="og:updated_time" content="2016-04-01T07:08:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用CSS画一个自己的初音">
+<meta name="twitter:description" content="某天在写元素的圆角时突然想起，前阵子看了CSS Screct一部分(Github地址)，在线可以试读一部分。试读的章节说到了可以用CSS3的一些新特性画出一些非常奇特的形状，这提醒了我：  可以画出更加生动的东西吧！于是尝试一下画一个Q版的初音未来，先上预览图：  或者可以直接戳链接。 接下来我简单就图案的几个值得说明的地方来讲解下… 1. 弯弯的呆毛 其实这个很简单，只用到了border-rad">
+<meta name="twitter:image" content="http://7xokdi.com1.z0.glb.clouddn.com/miku%2Frealize-something.gif">
+  
+    <link rel="alternative" href="/atom.xml" title="小狒sin" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xokdi.com1.z0.glb.clouddn.com/avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Sinker</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">18 Til I Die</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/s1nker" title="github">github</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/sin-chaw" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="mailto:s1nker@126.com" title="mail">mail</a>
+					        
+								<a class="linkedin" target="_blank" href="https://cn.linkedin.com/in/s1nker" title="linkedin">linkedin</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/ES6/" style="font-size: 15px;">ES6</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/Safari/" style="font-size: 10px;">Safari</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/development-docs/" style="font-size: 10px;">development docs</a> <a href="/tags/feeling/" style="font-size: 10px;">feeling</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/js对象/" style="font-size: 10px;">js对象</a> <a href="/tags/life/" style="font-size: 15px;">life</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/作用域/" style="font-size: 10px;">作用域</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/深拷贝/" style="font-size: 10px;">深拷贝</a> <a href="/tags/组件封装/" style="font-size: 10px;">组件封装</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">热爱分享，乐于折腾的前端程序猿，脑洞有点大！</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Sinker</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xokdi.com1.z0.glb.clouddn.com/avatar.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Sinker</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">18 Til I Die</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/s1nker" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/sin-chaw" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="mailto:s1nker@126.com" title="mail">mail</a>
+			        
+						<a class="linkedin" target="_blank" href="https://cn.linkedin.com/in/s1nker" title="linkedin">linkedin</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-draw-miku-using-css" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/31/draw-miku-using-css/" class="article-date">
+  	<time datetime="2016-03-30T16:00:00.000Z" itemprop="datePublished">2016-03-31</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      用CSS画一个自己的初音
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>某天在写元素的圆角时突然想起，前阵子看了CSS Screct一部分(<a href="https://github.com/cssmagic/CSS-Secrets" target="_blank" rel="external">Github地址</a>)，在线可以试读一部分。试读的章节说到了可以用CSS3的一些新特性画出一些非常奇特的形状，这提醒了我：</p>
+<p><img src="http://7xokdi.com1.z0.glb.clouddn.com/miku%2Frealize-something.gif" alt="expression"></p>
+<p>可以画出更加生动的东西吧！<br>于是尝试一下画一个Q版的初音未来，先上预览图：</p>
+<p><img src="http://7xokdi.com1.z0.glb.clouddn.com/miku%2Fmiku-preview.png" alt="miku-preview"></p>
+<p>或者可以直接戳<a href="http://htmlpreview.github.io/?https://github.com/s1nker/miku-s1nker.github.io/blob/master/index.html" target="_blank" rel="external">链接</a>。</p>
+<p>接下来我简单就图案的几个值得说明的地方来讲解下…</p>
+<h1 id="1-弯弯的呆毛"><a href="#1-弯弯的呆毛" class="headerlink" title="1. 弯弯的呆毛"></a>1. 弯弯的呆毛</h1><p><img src="http://7xokdi.com1.z0.glb.clouddn.com/miku%2Ffringe.png" alt="fringe"></p>
+<p>其实这个很简单，只用到了border-radius的属性，原理上我们只要设置好div的宽度和高度，再将div的背景色设置为透明，然后根据是要向那个方向弯曲来设置单个方向的border，将border的宽度设置为呆毛的粗度，再控制div单个角的圆角属性就可以了。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">fringe2</span> &#123;</div><div class="line">    <span class="attribute">top</span>: -<span class="number">10em</span>;</div><div class="line">    <span class="attribute">left</span>: <span class="number">2.3em</span>;</div><div class="line">    <span class="attribute">width</span>: <span class="number">2em</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">8em</span>;</div><div class="line">    <span class="attribute">border-right</span>: <span class="number">2.5em</span> solid <span class="number">#2acccc</span>;</div><div class="line">    <span class="attribute">border-radius</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">5em</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>诶，原来我们看到的那根弯曲的毛其实是div的border呀~</p>
+<h1 id="2-上下宽度不同的圆脸"><a href="#2-上下宽度不同的圆脸" class="headerlink" title="2. 上下宽度不同的圆脸"></a>2. 上下宽度不同的圆脸</h1><p><img src="http://7xokdi.com1.z0.glb.clouddn.com/miku%2Fhead.png" alt="head"></p>
+<p>这个形状的头看起来有点怪呀…<br>将这个头分解一下，其实可以分成三个部分，上下两个大小不同的半圆和中间的上大下小的梯形。所以这里其实是用伪元素<code>::before</code>和<code>:after</code>来做，把中间的梯形当做div，上下两个半圆就是这个div的<code>::before</code>和<code>:after</code>啦~</p>
+<p>这里值得说一下伪元素的妙用，只要用的合适，一个div也可以画出很复杂的图形。还有伪元素是无法应用在窗级元素(如input)上的~之前踩过这个坑~<br>简单看过资料，据W3C的说明因为窗级元素是不能有子元素的，伪元素某种意义上是其附着元素的子元素。但是Chrome里的input支持伪元素的使用…应该是坑…</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#head</span> &#123;</div><div class="line">    <span class="attribute">position</span>: relative;</div><div class="line">    <span class="attribute">width</span>: <span class="number">10em</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">border-top</span>: <span class="number">6em</span> solid <span class="number">#fff1cb</span>;</div><div class="line">    <span class="attribute">border-right</span>: <span class="number">1.5em</span> solid transparent;</div><div class="line">    <span class="attribute">border-bottom</span>: none;</div><div class="line">    <span class="attribute">border-left</span>: <span class="number">1.5em</span> solid transparent;</div><div class="line">    <span class="attribute">z-index</span>: <span class="number">21</span>;</div><div class="line">    <span class="attribute">animation</span>: nodding <span class="number">5s</span> infinite;</div><div class="line">&#125;</div><div class="line"><span class="selector-id">#head</span><span class="selector-pseudo">::before</span> &#123;</div><div class="line">    <span class="attribute">content</span>: <span class="string">""</span>;</div><div class="line">    <span class="attribute">position</span>: absolute;</div><div class="line">    <span class="attribute">top</span>: -<span class="number">11em</span>;</div><div class="line">    <span class="attribute">left</span>: -<span class="number">1.5em</span>;</div><div class="line">    <span class="attribute">width</span>: <span class="number">13em</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">5em</span>;</div><div class="line">    <span class="attribute">background-color</span>: <span class="number">#fff1cb</span>;</div><div class="line">    <span class="attribute">border-radius</span>: <span class="number">7em</span> <span class="number">7em</span> <span class="number">0</span> <span class="number">0</span> / <span class="number">5em</span> <span class="number">5em</span> <span class="number">0</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"><span class="selector-id">#head</span><span class="selector-pseudo">::after</span> &#123;</div><div class="line">    <span class="attribute">content</span>: <span class="string">""</span>;</div><div class="line">    <span class="attribute">position</span>: absolute;</div><div class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">width</span>: <span class="number">10em</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">2em</span>;</div><div class="line">    <span class="attribute">background-color</span>: <span class="number">#fff1cb</span>;</div><div class="line">    <span class="attribute">border-radius</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">5em</span> <span class="number">5em</span> / <span class="number">0</span> <span class="number">0</span> <span class="number">2em</span> <span class="number">2em</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="3-微笑的小嘴"><a href="#3-微笑的小嘴" class="headerlink" title="3. 微笑的小嘴"></a>3. 微笑的小嘴</h1><p><img src="http://7xokdi.com1.z0.glb.clouddn.com/miku%2Fmouth.png" alt="mouth"></p>
+<p>微笑的嘴巴是最容易画的！<img src="http://" alt="smile"><br>这个应该是最简单的，先将div设置成圆形or椭圆形，给背景色设置透明，border-bottom设置为solid，颜色为深灰色，宽度为嘴巴线条的宽度就可以啦~</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#head</span> <span class="selector-class">.mouth</span> &#123;</div><div class="line">    <span class="attribute">position</span>: absolute;</div><div class="line">    <span class="attribute">top</span>: -.<span class="number">8em</span>;</div><div class="line">    <span class="attribute">left</span>: <span class="number">4.1em</span>;</div><div class="line">    <span class="attribute">width</span>: <span class="number">1.2em</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">1em</span>;</div><div class="line">    <span class="attribute">border-top</span>: .<span class="number">2em</span> solid transparent;</div><div class="line">    <span class="attribute">border-left</span>: .<span class="number">2em</span> solid transparent;</div><div class="line">    <span class="attribute">border-right</span>: .<span class="number">2em</span> solid transparent;</div><div class="line">    <span class="attribute">border-bottom</span>: .<span class="number">2em</span> solid <span class="number">#333</span>;</div><div class="line">    <span class="attribute">border-radius</span>: <span class="number">1em</span>;</div><div class="line">    <span class="attribute">z-index</span>: <span class="number">22</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="4-形状规则的领带"><a href="#4-形状规则的领带" class="headerlink" title="4. 形状规则的领带"></a>4. 形状规则的领带</h1><p><img src="http://7xokdi.com1.z0.glb.clouddn.com/miku%2Ftie.png" alt="tie"></p>
+<p>为什么说形状规则呢？且看截图，从上到下其实就是三个我们小学都学过的平面图形优呀！一个是倒立的看起来很胖的梯形，一个是正立的很瘦的梯形，最后一个就是倒立的三角形呀！不要问我为什么最上面的看起来不是梯形…因为被挡了一部分…</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#body</span> <span class="selector-class">.tie</span> &#123;</div><div class="line">    <span class="attribute">position</span>: absolute;</div><div class="line">    <span class="attribute">top</span>: .<span class="number">5em</span>;</div><div class="line">    <span class="attribute">left</span>: <span class="number">1.3em</span>;</div><div class="line">    <span class="attribute">width</span>: .<span class="number">8em</span>;</div><div class="line">    <span class="attribute">border-top</span>: <span class="number">1em</span> solid <span class="number">#2aaaaa</span>;</div><div class="line">    <span class="attribute">border-left</span>: .<span class="number">3em</span> solid transparent;</div><div class="line">    <span class="attribute">border-right</span>: .<span class="number">3em</span> solid transparent;</div><div class="line">    <span class="attribute">z-index</span>: <span class="number">11</span>;</div><div class="line">&#125;</div><div class="line"><span class="selector-id">#body</span> <span class="selector-class">.tie</span><span class="selector-pseudo">::before</span> &#123;</div><div class="line">    <span class="attribute">content</span>: <span class="string">""</span>;</div><div class="line">    <span class="attribute">position</span>: absolute;</div><div class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">left</span>: -.<span class="number">6em</span>;</div><div class="line">    <span class="attribute">width</span>: .<span class="number">8em</span>;</div><div class="line">    <span class="attribute">border-bottom</span>: <span class="number">2.5em</span> solid <span class="number">#2aaaaa</span>;</div><div class="line">    <span class="attribute">border-left</span>: .<span class="number">6em</span> solid transparent;</div><div class="line">    <span class="attribute">border-right</span>: .<span class="number">6em</span> solid transparent;</div><div class="line">&#125;</div><div class="line"><span class="selector-id">#body</span> <span class="selector-class">.tie</span><span class="selector-pseudo">::after</span> &#123;</div><div class="line">    <span class="attribute">content</span>: <span class="string">""</span>;</div><div class="line">    <span class="attribute">position</span>: absolute;</div><div class="line">    <span class="attribute">top</span>: <span class="number">2.5em</span>;</div><div class="line">    <span class="attribute">left</span>: -.<span class="number">6em</span>;</div><div class="line">    <span class="attribute">border-top</span>: .<span class="number">6em</span> solid <span class="number">#2aaaaa</span>;</div><div class="line">    <span class="attribute">border-left</span>: <span class="number">1em</span> solid transparent;</div><div class="line">    <span class="attribute">border-right</span>: <span class="number">1em</span> solid transparent;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="5-形状好像很规则的发夹"><a href="#5-形状好像很规则的发夹" class="headerlink" title="5. 形状好像很规则的发夹"></a>5. 形状好像很规则的发夹</h1><p><img src="http://7xokdi.com1.z0.glb.clouddn.com/miku%2Fhairpin.png" alt="hairpin"></p>
+<p>看到这里读者应该很熟悉作者的尿性了…都是伪元素、圆角，能来点高端点的吗？<br>为了提升这篇文章的深度，要强行加入点CSS3的特性才行！<br>一开始也是分解成三个部分，考虑到视角的因素，看得到的只有方形的三个边，所以用一个div加伪元素可以做到。<br>考虑到三种颜色，可以给div设置背景色，用到linear-gradient属性，给背景分成三段，分别设置不同的颜色。<br>倾斜的效果可以用transform的skew属性，将弯折的部分对接起来看起来就是有点立体感的发夹了…</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#head</span> <span class="selector-class">.hair</span> <span class="selector-class">.hairpin</span><span class="selector-class">.left</span> &#123;</div><div class="line">    <span class="attribute">top</span>: -<span class="number">10em</span>;</div><div class="line">    <span class="attribute">left</span>: -<span class="number">1em</span>;</div><div class="line">    <span class="attribute">transform</span>: <span class="built_in">skew</span>(18deg);</div><div class="line">&#125;</div><div class="line"><span class="selector-id">#head</span> <span class="selector-class">.hair</span> <span class="selector-class">.hairpin</span> &#123;</div><div class="line">    <span class="attribute">position</span>: absolute;</div><div class="line">    <span class="attribute">width</span>: .<span class="number">6em</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">2.5em</span>;</div><div class="line">    <span class="attribute">background</span>: <span class="number">#333</span>;</div><div class="line">    <span class="attribute">z-index</span>: <span class="number">29</span>;</div><div class="line">&#125;</div><div class="line"><span class="selector-id">#head</span> <span class="selector-class">.hair</span> <span class="selector-class">.hairpin</span><span class="selector-class">.left</span><span class="selector-pseudo">::before</span> &#123;</div><div class="line">    <span class="attribute">content</span>: <span class="string">""</span>;</div><div class="line">    <span class="attribute">position</span>: absolute;</div><div class="line">    <span class="attribute">top</span>: <span class="number">0em</span>;</div><div class="line">    <span class="attribute">left</span>: -<span class="number">1em</span>;</div><div class="line">    <span class="attribute">width</span>: .<span class="number">6em</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">2.5em</span>;</div><div class="line">    <span class="attribute">background</span>: <span class="built_in">-webkit-linear-gradient</span>(90deg, #333 30%, #e04e7d 30%, #e04e7d 70%, #333 0);</div><div class="line">    <span class="attribute">background</span>: <span class="built_in">-o-linear-gradient</span>(90deg, #333 30%, #e04e7d 30%, #e04e7d 70%, #333 0);</div><div class="line">    <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(90deg, #333 30%, #e04e7d 30%, #e04e7d 70%, #333 0);</div><div class="line">    <span class="attribute">transform</span>: <span class="built_in">skew</span>(-36deg);</div><div class="line">&#125;</div><div class="line"><span class="selector-id">#head</span> <span class="selector-class">.hair</span> <span class="selector-class">.hairpin</span><span class="selector-class">.left</span><span class="selector-pseudo">::after</span> &#123;</div><div class="line">    <span class="attribute">content</span>: <span class="string">""</span>;</div><div class="line">    <span class="attribute">position</span>: absolute;</div><div class="line">    <span class="attribute">top</span>: <span class="number">2.5em</span>;</div><div class="line">    <span class="attribute">left</span>: -<span class="number">1.7em</span>;</div><div class="line">    <span class="attribute">width</span>: .<span class="number">6em</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">2em</span>;</div><div class="line">    <span class="attribute">background</span>: <span class="built_in">-webkit-linear-gradient</span>(90deg, #333 30%, #e04e7d 30%, #e04e7d 70%, #333 0);</div><div class="line">    <span class="attribute">background</span>: <span class="built_in">-o-linear-gradient</span>(90deg, #333 30%, #e04e7d 30%, #e04e7d 70%, #333 0);</div><div class="line">    <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(90deg, #333 30%, #e04e7d 30%, #e04e7d 70%, #333 0);</div><div class="line">    <span class="attribute">transform</span>: <span class="built_in">skew</span>(9deg);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="6-简单的总结"><a href="#6-简单的总结" class="headerlink" title="6. 简单的总结"></a>6. 简单的总结</h1><p>总的来说，要画出这样的形象，可以选择的属性有以下这些：</p>
+<blockquote>
+<ul>
+<li>border-top / border-right / border-bottom / border-left</li>
+<li>border-radius</li>
+<li>::before &amp; ::after</li>
+<li>transform: rotate / skew / scale / translate</li>
+<li>background: linear-gradient</li>
+</ul>
+</blockquote>
+<p>参考资料：<br><a href="http://www.w3cplus.com/css3/css-secrets/complex-background-pattern.html" target="_blank" rel="external">CSS秘密花园：复杂背景图案</a> 墙裂推荐此书呀！<br><a href="http://one-div.com/" target="_blank" rel="external">one div</a> 有点好玩的一个div实现复杂图形，有很多案例，运用到了很多CSS3特效。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/04/09/writing-docs-with-markdown/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          使用markdown语言写开发文档
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/03/12/data-summary/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">HTML中data属性的使用</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="draw-miku-using-css" data-title="用CSS画一个自己的初音" data-url="http://yoursite.com/2016/03/31/draw-miku-using-css/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2018 Sinker
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
