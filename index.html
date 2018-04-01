@@ -105,7 +105,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/ES6/" style="font-size: 15px;">ES6</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/Safari/" style="font-size: 10px;">Safari</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/development-docs/" style="font-size: 10px;">development docs</a> <a href="/tags/feeling/" style="font-size: 10px;">feeling</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/js对象/" style="font-size: 10px;">js对象</a> <a href="/tags/life/" style="font-size: 15px;">life</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/作用域/" style="font-size: 10px;">作用域</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/深拷贝/" style="font-size: 10px;">深拷贝</a> <a href="/tags/组件封装/" style="font-size: 10px;">组件封装</a>
+						<a href="/tags/Base64/" style="font-size: 10px;">Base64</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/E2E-测试/" style="font-size: 10px;">E2E 测试</a> <a href="/tags/ES6/" style="font-size: 15px;">ES6</a> <a href="/tags/FormData/" style="font-size: 10px;">FormData</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/Nightmare/" style="font-size: 10px;">Nightmare</a> <a href="/tags/Safari/" style="font-size: 10px;">Safari</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/development-docs/" style="font-size: 10px;">development docs</a> <a href="/tags/feeling/" style="font-size: 10px;">feeling</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/js对象/" style="font-size: 10px;">js对象</a> <a href="/tags/life/" style="font-size: 15px;">life</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/作用域/" style="font-size: 10px;">作用域</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/单元测试/" style="font-size: 10px;">单元测试</a> <a href="/tags/深拷贝/" style="font-size: 10px;">深拷贝</a> <a href="/tags/组件封装/" style="font-size: 10px;">组件封装</a> <a href="/tags/自动化测试/" style="font-size: 10px;">自动化测试</a>
 					</div>
 				</section>
 				
@@ -168,6 +168,200 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-e2e-test-n-nightmare" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/03/29/e2e-test-n-nightmare/" class="article-date">
+  	<time datetime="2018-03-28T16:00:00.000Z" itemprop="datePublished">2018-03-29</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/29/e2e-test-n-nightmare/">E2E 测试与自动化测试工具 Nightmare</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-前端的自动化测试"><a href="#1-前端的自动化测试" class="headerlink" title="1. 前端的自动化测试"></a>1. 前端的自动化测试</h1><h2 id="1-2-单元测试"><a href="#1-2-单元测试" class="headerlink" title="1.2 单元测试"></a>1.2 单元测试</h2><p><strong>单元测试</strong>往往只关注于一个代码片段，通常是一个模块或函数。实际应用中会将代码拆分成若干个小的组件，这也意味着你会写很多的单元测试用例来保证代码的功能正常。</p>
+<p>前端开发中的单元测试工具有 <a href="https://facebook.github.io/jest/zh-Hans/" target="_blank" rel="external">jest</a>、<a href="https://mochajs.org/" target="_blank" rel="external">mocha</a>、<a href="https://jasmine.github.io/" target="_blank" rel="external">jasmine</a> 和 <a href="https://qunitjs.com/" target="_blank" rel="external">qunit</a>。</p>
+<h2 id="1-3-E2E-测试"><a href="#1-3-E2E-测试" class="headerlink" title="1.3. E2E 测试"></a>1.3. E2E 测试</h2><p><strong>E2E</strong>（end to end）测试即<strong>端到端测试</strong>是，也称冒烟测试，用于测试真实浏览器环境下前端应用的流程和表现，相当于代替人工去操作应用。E2E 测试是一个边界比较模糊的概念，有以下几个特点：</p>
+<ul>
+<li>把整个系统当作一个黑盒</li>
+<li>测试人员模拟真实用户在浏览器中操作UI</li>
+<li>测试出的问题可能是前端也可能是后端导致的</li>
+</ul>
+<p>常见的 E2E 测试工具有 <a href="http://www.nightmarejs.org/" target="_blank" rel="external">nightmare</a>、nightwatch 和 <a href="https://github.com/googlechrome/puppeteer" target="_blank" rel="external">puppeteer</a>。</p>
+<h2 id="1-4-单元测试和-E2E-测试的对比"><a href="#1-4-单元测试和-E2E-测试的对比" class="headerlink" title="1.4. 单元测试和 E2E 测试的对比"></a>1.4. 单元测试和 E2E 测试的对比</h2><p>单元测试的概念出现已久，相关的工具体系也已经十分完善，但是单元测试的维护成本较高，并且对于前端测试来说有很多需求无法满足。此外，单元测试需要较多的角度完善的测试用例支持，且这些测试用例都是较为简单的，针对每一个小模块或者组建的输入与输出。</p>
+<p>E2E 测试针对具体的测试环境条件来编写测试用例，一般情况下测试用例不会太多.</p>
+<h2 id="1-5-TDD-和-BDD"><a href="#1-5-TDD-和-BDD" class="headerlink" title="1.5. TDD 和 BDD"></a>1.5. TDD 和 BDD</h2><p><strong>TDD</strong>（Test Drive Development）即<strong>测试驱动开发</strong>。简单的说就是先根据需求写测试用例，再代码实现，接着测试，循环此过程直到产品的实现。可以看出来，TDD 的基本思路就是通过测试来推动整个开发的进行，但测试驱动开发并不只是单纯的测试工作，而是把需求分析，设计，质量控制量化的过程。</p>
+<p><strong>BDD</strong>（Behavior Drive Development）即<strong>行为驱动开发</strong>，BDD 可以看作是对 TDD 的一种补充，或者说是 TDD 的一个分支。在TDD中，我们并不能完全保证根据设计所编写的测试就是用户所期望的功能。BDD将这一部分简单和自然化，用自然语言来描述，让开发、测试、BA以及客户都能在这个基础上达成一致。BDD 更加依赖于需求行为和文档来驱动开发，这些文档的描述跟测试代码很相似。</p>
+<p>通过对比，TDD 通过测试来推动整个开发的进行。这有助于编写简洁可用和高质量的代码，并加速实际开发过程，可能导致的问题是需求和开发脱节，实际产品与用户所需要的功能并不匹配。而 BDD 通过鼓励项目中的开发者、QA 和非技术人员或商业参与者之间进行协作，确保程序实现效果与用户需求一致。</p>
+<p>可以看出 <strong>E2E 测试</strong>更多的是换和 <strong>BDD</strong> 的开发模式进行结合,实际应用用会将 E2E 的测试工具和 BDD 测试框架进行结合。</p>
+<h1 id="2-Nightmare"><a href="#2-Nightmare" class="headerlink" title="2. Nightmare"></a>2. Nightmare</h1><h2 id="2-1-基本介绍"><a href="#2-1-基本介绍" class="headerlink" title="2.1.基本介绍"></a>2.1.基本介绍</h2><p>Nightmare 是一个基于 electron 的浏览器自动化代码库，用于实现爬虫或自动化测试。相较于传统的爬虫框架（scrapy/pyspider），或者dom操作库（cheerio/jsdom），或者基于浏览器的自动化框架（selenium/phantomjs），他的优势在于提供了一个<strong>简洁有效</strong>的编程模型。</p>
+<p>官网给出的实现一个向yahoo自动提交关键词并搜索的功能如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">yield</span> Nightmare()</div><div class="line">  .goto(<span class="string">'http://yahoo.com'</span>)</div><div class="line">  .type(<span class="string">'input[title="Search"]'</span>, <span class="string">'github nightmare'</span>)</div><div class="line">  .click(<span class="string">'.searchsubmit'</span>);</div></pre></td></tr></table></figure>
+<h2 id="2-2-相关-API"><a href="#2-2-相关-API" class="headerlink" title="2.2. 相关 API"></a>2.2. 相关 API</h2><p>基本的交互 API 包括：</p>
+<ul>
+<li><code>goto(url[, headers])</code> 跳转到url</li>
+<li><code>viewport(width,</code> height) 浏览器窗口大小</li>
+<li><code>wait(selector)</code> 等待某个dom元素出现</li>
+<li><code>click(selector)</code> 点击某个dom元素</li>
+<li><code>type(selector[, text])</code> 在某个dom元素中输入</li>
+<li><code>inject(type, file)</code> 在页面上挂载 js/css 文件内容</li>
+<li><code>evaluate(fn[, arg1, arg2,...])</code> 在客户端注入JS脚本并执行，从而实现electron模型下的C/S互动及数据交换</li>
+<li>……</li>
+</ul>
+<h2 id="2-3-实例"><a href="#2-3-实例" class="headerlink" title="2.3. 实例"></a>2.3. 实例</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Nightmare <span class="keyword">from</span> <span class="string">'nightmare'</span>;</div><div class="line"></div><div class="line">describe(<span class="string">'Login'</span>, () =&gt; &#123;</div><div class="line">  <span class="keyword">let</span> page;</div><div class="line">  beforeEach(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    page = Nightmare();</div><div class="line">    page.goto(<span class="string">'http://localhost:8000/#/user/login'</span>);</div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  it(<span class="string">'should login with failure'</span>, <span class="keyword">async</span> () =&gt; &#123;</div><div class="line">    <span class="keyword">await</span> page.type(<span class="string">'#userName'</span>, <span class="string">'mockuser'</span>)</div><div class="line">      .type(<span class="string">'#password'</span>, <span class="string">'wrong_password'</span>)</div><div class="line">      .click(<span class="string">'button[type="submit"]'</span>)</div><div class="line">      .wait(<span class="string">'.ant-alert-error'</span>) <span class="comment">// should display error</span></div><div class="line">      .end();</div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  it(<span class="string">'should login successfully'</span>, <span class="keyword">async</span> () =&gt; &#123;</div><div class="line">    <span class="keyword">const</span> text = <span class="keyword">await</span> page.type(<span class="string">'#userName'</span>, <span class="string">'admin'</span>)</div><div class="line">      .type(<span class="string">'#password'</span>, <span class="string">'888888'</span>)</div><div class="line">      .click(<span class="string">'button[type="submit"]'</span>)</div><div class="line">      .wait(<span class="string">'.ant-layout-sider h1'</span>) <span class="comment">// should display error</span></div><div class="line">      .evaluate(<span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">document</span>.body.innerHTML)</div><div class="line">      .end();</div><div class="line">    expect(text).toContain(<span class="string">'&lt;h1&gt;Ant Design Pro&lt;/h1&gt;'</span>);</div><div class="line">  &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> expect = <span class="built_in">require</span>(<span class="string">'chai'</span>).expect;</div><div class="line"><span class="keyword">const</span> Nightmare = <span class="built_in">require</span>(<span class="string">'nightmare'</span>);</div><div class="line"><span class="keyword">const</span> assert = <span class="built_in">require</span>(<span class="string">'assert'</span>);</div><div class="line"></div><div class="line">describe(<span class="string">'simulate search'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">　　<span class="keyword">this</span>.timeout(<span class="string">'30s'</span>)</div><div class="line"> </div><div class="line">　　<span class="keyword">let</span> nightmare = <span class="literal">null</span></div><div class="line">　　beforeEach(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">　　　　<span class="comment">// 设置显示模拟弹框</span></div><div class="line">　　　　nightmare = <span class="keyword">new</span> Nightmare(&#123;</div><div class="line">　　　　show: <span class="literal">true</span>,</div><div class="line">　　　&#125;)</div><div class="line">　　&#125;)</div><div class="line"> </div><div class="line">　　it(<span class="string">'模拟用户搜索'</span>, <span class="function"><span class="params">done</span> =&gt;</span> &#123;</div><div class="line">　　　　nightmare</div><div class="line">　　　　.goto(<span class="string">'https://www.baidu.com/'</span>)  <span class="comment">//设置搜索引擎</span></div><div class="line">　　　　.viewport(<span class="number">1200</span>, <span class="number">672</span>) 　 <span class="comment">//设置弹框视口宽高　　　　　　　　</span></div><div class="line">　　　　.type(<span class="string">'form[action*="/s"] [name=wd]'</span>, <span class="string">'github nightmare'</span>)   <span class="comment">//获取搜索框，自动填充搜索内容</span></div><div class="line">　　　　.click(<span class="string">'form[action*="/s"] [type=submit]'</span>)  <span class="comment">//获取点击按钮，模拟点击</span></div><div class="line">　　　　.wait(<span class="number">5000</span>) <span class="comment">//等待5s(可为dom节点)，获取第一条的信息的内容</span></div><div class="line">　　　　.evaluate(<span class="function"><span class="params">()</span> =&gt;</span></div><div class="line">　　　　　<span class="built_in">document</span>.querySelector(<span class="string">'#content_left .c-container a em'</span>).innerHTML</div><div class="line">　　　　)</div><div class="line">　　　　.end()</div><div class="line">　　　　.then(<span class="function"><span class="params">content</span> =&gt;</span> &#123;</div><div class="line">　　　　　<span class="built_in">console</span>.log(content === <span class="string">'Nightmare'</span>,<span class="string">'-----&gt;true'</span>)  <span class="comment">//输出结果</span></div><div class="line">		  done();</div><div class="line">　　　　&#125;)</div><div class="line">　　　　.catch(<span class="function"><span class="params">error</span> =&gt;</span> &#123;</div><div class="line">　　　　　<span class="built_in">console</span>.error(<span class="string">'Search failed:'</span>, error);  <span class="comment">//输出捕捉到的错误</span></div><div class="line">		  done();</div><div class="line">　　　　&#125;);</div><div class="line">　　&#125;)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>参考：</p>
+<ul>
+<li><a href="https://segmentfault.com/a/1190000008915567" target="_blank" rel="external">测试你的前端代码 - part3（端到端测试）</a></li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/E2E-测试/">E2E 测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nightmare/">Nightmare</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/单元测试/">单元测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/自动化测试/">自动化测试</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-base64-convert-to-upload" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/03/02/base64-convert-to-upload/" class="article-date">
+  	<time datetime="2018-03-01T16:00:00.000Z" itemprop="datePublished">2018-03-02</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/02/base64-convert-to-upload/">Base64 图片数据转换上传</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-base64"><a href="#1-base64" class="headerlink" title="1. base64"></a>1. base64</h1><h2 id="1-1-背景介绍"><a href="#1-1-背景介绍" class="headerlink" title="1.1. 背景介绍"></a>1.1. 背景介绍</h2><blockquote>
+<p>Base64是网络上最常见的用于传输 8Bit 字节码的编码方式之一，Base64 就是一种基于 64 个可打印字符来表示二进制数据的方法。</p>
+</blockquote>
+<p>用记事本打开exe、jpg、pdf这些文件时，我们都会看到一大堆乱码，因为二进制文件包含很多无法显示和打印的字符，所以，如果要让记事本这样的文本处理软件能处理二进制数据，就需要一个二进制到字符串的转换方法。Base64 就是一种最常见的二进制编码方法。</p>
+<p>简单的说，Base64 将 8 位的非英语字符转化为 7 位的 ASCII 字符。最初为了解决电子邮件中不能直接使用非 ASCII 码字符的问题而被提出，除此之外还有别的意义：</p>
+<ul>
+<li>所有的二进制文件，都可以因此转化为可打印的文本编码，使用文本软件进行编辑</li>
+<li>能够对文本进行简单的加密</li>
+</ul>
+<h2 id="1-2-原理简析"><a href="#1-2-原理简析" class="headerlink" title="1.2. 原理简析"></a>1.2. 原理简析</h2><p>Base64，就是说选出64个字符：</p>
+<ul>
+<li>小写字母 a-z</li>
+<li>大写字母 A-Z</li>
+<li>数字 0-9</li>
+<li>符号 “+”、”/“</li>
+</ul>
+<p>实际上还有作为垫字的“=”，所以在一段 base64 文本中会看到 65 个字符。将除了ASCII字符以外的其他所有符号都转换成这个字符集中的字符。</p>
+<p>Base64 对二进制数据进行处理，每 3 个字节一组，一共是 3 x 8 = 24bit，划为4组，每组正好 6 个 bit：</p>
+<p><img src="http://" alt="base64-coding"></p>
+<p>得到四个 6 位的数据之后给每一个开头加上 <code>00</code>，这样 3 个字节的数据就转成了 4 个字节。正是因此经过 Base64 编码过的数据会在大小上增加 33% 左右。</p>
+<p>如果要编码的二进制数据不是 3 的倍数，实际编码可能会在最后剩下 1 个或 2 个字节，Base64用 <code>\x00</code> 字节在末尾补足后，再在编码的末尾加上 1 个或 2 个 = 号，表示补了多少字节，在解码的时候，会自动去掉。</p>
+<h1 id="2-相关方法"><a href="#2-相关方法" class="headerlink" title="2. 相关方法"></a>2. 相关方法</h1><h2 id="2-1-window-atob-和-window-btoa"><a href="#2-1-window-atob-和-window-btoa" class="headerlink" title="2.1. window.atob() 和 window.btoa()"></a>2.1. <code>window.atob()</code> 和 <code>window.btoa()</code></h2><p>在JavaScript中，有 2 个函数分别用来处理解码和编码 Base64 字符串：</p>
+<ul>
+<li><code>window.atob()</code>：对用 Base64 编码过的字符串进行解码</li>
+<li><code>window.btoa()</code>：从 String 对象中创建一个 Base64 编码的 ASCII 字符串，其中字符串中的每个字符都被视为一个二进制数据字节</li>
+</ul>
+<h2 id="2-2-Uint8Array"><a href="#2-2-Uint8Array" class="headerlink" title="2.2. Uint8Array"></a>2.2. Uint8Array</h2><p><code>Uint8Array</code> 数组类型表示一个 8 位无符号整型数组，创建时内容被初始化为 0。</p>
+<p>创建完后，可以以对象的方式或使用数组下标索引的方式引用数组中的元素。</p>
+<h2 id="2-3-Blob"><a href="#2-3-Blob" class="headerlink" title="2.3. Blob"></a>2.3. Blob</h2><p>Blob 对象表示一个不可变、原始数据的类文件对象。Blob 表示的不一定是 JavaScript 原生格式的数据。File 接口基于Blob，继承了 blob 的功能并将其扩展使其支持用户系统上的文件。</p>
+<p>要构建一个 Blob 对象可以使用 <code>Blob()</code> 构造函数：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> aBlob = <span class="keyword">new</span> Blob( <span class="built_in">array</span>, options );</div></pre></td></tr></table></figure>
+<p><code>Blob()</code> 构造函数返回的 Blob 对象内容由参数数组中给出的值的串联组成。参数如下：</p>
+<ul>
+<li>array 是一个由ArrayBuffer, ArrayBufferView, Blob, DOMString 等对象构成的 Array ，或者其他类似对象的混合体，它将会被放进 Blob。DOMStrings会被编码为UTF-8</li>
+<li>options 是一个可选的 BlobPropertyBag 字典，它可能会指定如下两个属性：key 和 ending</li>
+</ul>
+<h1 id="3-具体实现"><a href="#3-具体实现" class="headerlink" title="3. 具体实现"></a>3. 具体实现</h1><p>为了将 Base64 数据转换成二进制的数据进行上传，可以分成以下几个步骤：</p>
+<ol>
+<li>去掉 Base64 图片数据字串中开头一些类型说明的内容</li>
+<li>取出 Base64 图片数据字串中的 MIME 说明</li>
+<li>用 <code>window.atob()</code> 解码 Base64 转换成图片原生的数据字串</li>
+<li>将得到的图片原生字串放入 Uint8Array</li>
+<li>转换成 Blob 格式</li>
+<li>调用 FormData 的 <code>append()</code> 插入 Blob 数据，连同 form 中的数据一同发送</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 将base64转换成二进制图片（Blob）</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">dataURItoBlob</span> (<span class="params">base64Data</span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> byteString = <span class="built_in">window</span>.atob(base64Data.split(<span class="string">','</span>)[<span class="number">1</span>]); <span class="comment">// 去掉url的头，是一段类型说明</span></div><div class="line">  <span class="keyword">const</span> mimeString = base64Data.split(<span class="string">','</span>)[<span class="number">0</span>].split(<span class="string">':'</span>)[<span class="number">1</span>].split(<span class="string">';'</span>)[<span class="number">0</span>]; <span class="comment">// 取出 MIME类型</span></div><div class="line"></div><div class="line">  <span class="keyword">let</span> ia = <span class="keyword">new</span> <span class="built_in">Uint8Array</span>(byteString.length); <span class="comment">// </span></div><div class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; byteString.length; i++) &#123;</div><div class="line">    ia[i] = byteString.charCodeAt(i);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">new</span> Blob([ia], &#123; <span class="attr">type</span>: mimeString &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> request <span class="keyword">from</span> <span class="string">'superagent'</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">submit</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> blob = dataURItoBlob(base64Data);</div><div class="line">  <span class="keyword">const</span> fd = <span class="keyword">new</span> FormData(<span class="built_in">document</span>.querySelector(<span class="string">'form'</span>));</div><div class="line">  fd.append(fileName, blob, file.file.name);</div><div class="line"></div><div class="line">  request.post(action)</div><div class="line">    .send(fd)</div><div class="line">    .end(<span class="function"><span class="keyword">function</span>(<span class="params">err, res</span>) </span>&#123;</div><div class="line">      <span class="comment">// eg.成功回调的处理逻辑</span></div><div class="line">      <span class="keyword">if</span> (err || !res.ok) &#123;</div><div class="line">        <span class="comment">// 处理 request 返回的请求错误</span></div><div class="line">        <span class="built_in">console</span>.log(<span class="string">"not 200 error msg:"</span> + err);</div><div class="line">        <span class="comment">// ...</span></div><div class="line">      &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="comment">// 处理后端返回的请求错误</span></div><div class="line">        <span class="keyword">if</span> (res.body.errorCode === <span class="number">0</span>) &#123;</div><div class="line">          <span class="comment">// do something ...</span></div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">          <span class="comment">// do something ...</span></div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>参考：</p>
+<ul>
+<li><a href="https://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001399413803339f4bbda5c01fc479cbea98b1387390748000" target="_blank" rel="external">base64 - 廖雪峰的官方网站</a></li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Base64/">Base64</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FormData/">FormData</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
   
     <article id="post-hack-ios-11-n-iphone-X" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -979,142 +1173,6 @@
       
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-data-summary" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/03/12/data-summary/" class="article-date">
-  	<time datetime="2016-03-11T16:00:00.000Z" itemprop="datePublished">2016-03-12</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/12/data-summary/">HTML中data属性的使用</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-HTML中的data属性"><a href="#1-HTML中的data属性" class="headerlink" title="1. HTML中的data属性"></a>1. HTML中的data属性</h2><p>HTML中的data-*属性可以说是无处不在，良好的兼容性，并且可以在view层作短暂的存储数据。<br>可以看到，例如 bootstrap，validator 等库或者插件都有用到这个方便的属性。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"user"</span> <span class="attr">data-name</span>=<span class="string">"james"</span> <span class="attr">data-age</span>=<span class="string">"32"</span> <span class="attr">data-first-name</span>=<span class="string">"lebron"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>记得之前自己写验证表单的插件时，也是使用了data-*属性，例如</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"user"</span> <span class="attr">name</span>=<span class="string">"user_name"</span> <span class="attr">data-is-validated</span>=<span class="string">"true"</span> <span class="attr">data-validate</span>=<span class="string">"true"</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>这里用<code>data-is-validated</code>表示该输入框是否已经验证过，而<code>data-validate</code>表示该输入框是否合法。 每次提交表单都要验证两个属性。 特别是在需要使用异步接口时的验证，通过判断输入框的状态(可以为未验证/验证等待中/已验证)，来避免异步请求验证时等待返回结果时的验证错误。</p>
-<p>摘取一段使用了Angular框架的页面代码:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">li</span> <span class="attr">ng-repeat</span>=<span class="string">"day in days"</span> <span class="attr">ng-click</span>=<span class="string">"changeDay($event, $index, day)"</span> <span class="attr">ng-class</span>=<span class="string">"&#123;'true':'active', 'false':''&#125;[(index === $index)]"</span> <span class="attr">class</span>=<span class="string">"ng-scope active"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>这里使用了ng-*的属性，其实也是类似于data-*属性的使用，ng关键字的使用正是Angular的缩写。</p>
-<h2 id="2-可以获取data属性的方法"><a href="#2-可以获取data属性的方法" class="headerlink" title="2. 可以获取data属性的方法"></a>2. 可以获取data属性的方法</h2><h3 id="1-HTML5提供的接口"><a href="#1-HTML5提供的接口" class="headerlink" title="1. HTML5提供的接口"></a>1. HTML5提供的接口</h3><p>HTML5提供了接口，通过元素的dataset属性来读写data属性的值，该方法返回一个所选元素data-*的DOMStringMap对象。<br>但是要注意的是，如果是类似于data-first-name的属性，应该用驼峰标记来获取。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> user = <span class="built_in">document</span>.getElementById(<span class="string">'user'</span>);</div><div class="line">user.dataset.name;			<span class="comment">//james</span></div><div class="line">user.dataset.age;			<span class="comment">//32</span></div><div class="line">user.dataset.firstName;		<span class="comment">//lebron</span></div><div class="line"></div><div class="line">user.dataset.name = <span class="literal">null</span>;	<span class="comment">//去除属性</span></div></pre></td></tr></table></figure>
-<p>由于是HTML5提供的接口，而且实际上这个接口非常 <strong>鸡肋</strong> ，兼容接口的浏览器版本比较苛刻:</p>
-<p><strong> Chrome8+, Firefox(Gecko)6.0+, InternetExplorer11+, Opera11.10+, Safari6+ </strong></p>
-<p>你没看错，就是IE11+…亮瞎眼了吧。</p>
-<h3 id="2-最原始的读取DOM元素属性的方法"><a href="#2-最原始的读取DOM元素属性的方法" class="headerlink" title="2. 最原始的读取DOM元素属性的方法"></a>2. 最原始的读取DOM元素属性的方法</h3><p>这个没什么，用<code>setAttribute</code>和<code>getAttribute</code>方法就可以获取和修改该属性了…<br>实际上这样看来data-*的属性和一般的属性也没什么区别嘛。 ╮(╯▽╰)╭</p>
-<h3 id="3-jQuery提供的方法"><a href="#3-jQuery提供的方法" class="headerlink" title="3. jQuery提供的方法"></a>3. jQuery提供的方法</h3><h4 id="jQuery的-data-方法可以获取到元素的data-属性，例如"><a href="#jQuery的-data-方法可以获取到元素的data-属性，例如" class="headerlink" title="jQuery的$().data()方法可以获取到元素的data-*属性，例如:"></a>jQuery的$().data()方法可以获取到元素的data-*属性，例如:</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'#user'</span>).data(<span class="string">'name'</span>); <span class="comment">//james</span></div><div class="line">$(<span class="string">'#user'</span>).data(<span class="string">'name'</span>, curry); <span class="comment">//curry</span></div></pre></td></tr></table></figure>
-<h4 id="jQuery还可以使用attr-来获取data属性"><a href="#jQuery还可以使用attr-来获取data属性" class="headerlink" title="jQuery还可以使用attr()来获取data属性"></a>jQuery还可以使用attr()来获取data属性</h4><p>但是要注意的是，使用attr()给元素的data属性赋值时，如果使用data()来获取会获取不到，也就是data()方法和attr()方法是不能通用的，如果你使用的是attr()方法，那么你最好所有的data属性读取都使用attr()方法吧。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML/">HTML</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-some-feelings" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/03/03/some-feelings/" class="article-date">
-  	<time datetime="2016-03-02T16:00:00.000Z" itemprop="datePublished">2016-03-03</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/03/some-feelings/">只是想多了点</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在现在的小公司做的事情确乎是很多, 最近竟然由我这个还没毕业的大四狗来当面试官, 好几次的面试下来, 结果挺让我失望</p>
-<p>简单的来说可以面试的人分为三类:</p>
-<blockquote>
-<ul>
-<li>多年工作经验, 却没有积累到什么</li>
-<li>半路出家, 对于知识的深入程度非常有限</li>
-<li>有一定的经验, 三剑客都理解得可以, 对于常用的框架有基本的了解</li>
-</ul>
-</blockquote>
-<p>其实看到有的面试者, 知识掌握不怎么样, 一看工作经验, 都是些无关痛痒的项目, 不得不为之感慨, 花去了时间没有积累到什么, 可以叫做浪费吧</p>
-<p>这几天在想, 我会不会也变成这样的人呢? 其实很多程序员可能都是这样, 没有太过人的天赋, 为了谋生活敲代码, 久而久之只会止步不前, 被时代淘汰. 跟我以前认为的不太一样: 程序员都是对很多事情不甚关心, 可以用代码创造自己的世界. 然而事实并不是这样. 不由得会有种去努力往上爬的冲动, 就是不想变成这样子.</p>
-<p>勉励自己.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span> (ture) &#123;</div><div class="line">	var blood = new Blood();</div><div class="line">	sin.push(blood);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/feeling/">feeling</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/life/">life</a></li></ul>
 	</div>
 
       
