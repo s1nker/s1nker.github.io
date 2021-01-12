@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>E2E 测试与自动化测试工具 Nightmare | 小狒sin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1. 前端的自动化测试1.2 单元测试单元测试往往只关注于一个代码片段，通常是一个模块或函数。实际应用中会将代码拆分成若干个小的组件，这也意味着你会写很多的单元测试用例来保证代码的功能正常。 前端开发中的单元测试工具有 jest、mocha、jasmine 和 qunit。 1.3. E2E 测试E2E（end to end）测试即端到端测试是，也称冒烟测试，用于测试真实浏览器环境下前端应用的流程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="E2E 测试与自动化测试工具 Nightmare">
+<meta property="og:url" content="http://yoursite.com/2018/03/29/e2e-test-n-nightmare/index.html">
+<meta property="og:site_name" content="小狒sin">
+<meta property="og:description" content="1. 前端的自动化测试1.2 单元测试单元测试往往只关注于一个代码片段，通常是一个模块或函数。实际应用中会将代码拆分成若干个小的组件，这也意味着你会写很多的单元测试用例来保证代码的功能正常。 前端开发中的单元测试工具有 jest、mocha、jasmine 和 qunit。 1.3. E2E 测试E2E（end to end）测试即端到端测试是，也称冒烟测试，用于测试真实浏览器环境下前端应用的流程">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-03-28T16:00:00.000Z">
+<meta property="article:modified_time" content="2018-03-31T21:05:45.894Z">
+<meta property="article:author" content="Sinker">
+<meta property="article:tag" content="E2E 测试">
+<meta property="article:tag" content="自动化测试">
+<meta property="article:tag" content="Nightmare">
+<meta property="article:tag" content="单元测试">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://tva4.sinaimg.cn/large/6f4890d4gy1gml6uophvsj20m60m6mz3.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/"></a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/s1nker" title="github">github</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/sin-chaw" title="zhihu">zhihu</a>
+					        
+								<a class="douban" target="_blank" href="https://www.douban.com/people/56917679/" title="douban">douban</a>
+					        
+								<a class="mail" target="_blank" href="mailto:s1nker@126.com" title="mail">mail</a>
+					        
+								<a class="linkedin" target="_blank" href="https://cn.linkedin.com/in/s1nker" title="linkedin">linkedin</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Base64/" style="font-size: 10px;">Base64</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/E2E-%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">E2E 测试</a> <a href="/tags/ES6/" style="font-size: 15px;">ES6</a> <a href="/tags/FormData/" style="font-size: 10px;">FormData</a> <a href="/tags/Geoserver/" style="font-size: 10px;">Geoserver</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/Nightmare/" style="font-size: 10px;">Nightmare</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/React-fiber/" style="font-size: 10px;">React fiber</a> <a href="/tags/React-%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">React 源码学习</a> <a href="/tags/SLD/" style="font-size: 10px;">SLD</a> <a href="/tags/Safari/" style="font-size: 10px;">Safari</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/development-docs/" style="font-size: 10px;">development docs</a> <a href="/tags/feeling/" style="font-size: 10px;">feeling</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/js%E5%AF%B9%E8%B1%A1/" style="font-size: 10px;">js对象</a> <a href="/tags/leaflet/" style="font-size: 10px;">leaflet</a> <a href="/tags/life/" style="font-size: 15px;">life</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/openlayers/" style="font-size: 10px;">openlayers</a> <a href="/tags/%E4%BD%9C%E7%94%A8%E5%9F%9F/" style="font-size: 10px;">作用域</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a> <a href="/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">单元测试</a> <a href="/tags/%E5%9C%B0%E5%9B%BE/" style="font-size: 10px;">地图</a> <a href="/tags/%E6%B7%B1%E6%8B%B7%E8%B4%9D/" style="font-size: 10px;">深拷贝</a> <a href="/tags/%E7%BB%84%E4%BB%B6%E5%B0%81%E8%A3%85/" style="font-size: 10px;">组件封装</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">自动化测试</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">热爱分享，乐于折腾的前端程序猿，脑洞有点大！</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide"></h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="https://tva4.sinaimg.cn/large/6f4890d4gy1gml6uophvsj20m60m6mz3.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author"></h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/s1nker" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/sin-chaw" title="zhihu">zhihu</a>
+			        
+						<a class="douban" target="_blank" href="https://www.douban.com/people/56917679/" title="douban">douban</a>
+			        
+						<a class="mail" target="_blank" href="mailto:s1nker@126.com" title="mail">mail</a>
+			        
+						<a class="linkedin" target="_blank" href="https://cn.linkedin.com/in/s1nker" title="linkedin">linkedin</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-e2e-test-n-nightmare" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/03/29/e2e-test-n-nightmare/" class="article-date">
+  	<time datetime="2018-03-28T16:00:00.000Z" itemprop="datePublished">2018-03-29</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      E2E 测试与自动化测试工具 Nightmare
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/E2E-%E6%B5%8B%E8%AF%95/" rel="tag">E2E 测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nightmare/" rel="tag">Nightmare</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" rel="tag">单元测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" rel="tag">自动化测试</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-前端的自动化测试"><a href="#1-前端的自动化测试" class="headerlink" title="1. 前端的自动化测试"></a>1. 前端的自动化测试</h1><h2 id="1-2-单元测试"><a href="#1-2-单元测试" class="headerlink" title="1.2 单元测试"></a>1.2 单元测试</h2><p><strong>单元测试</strong>往往只关注于一个代码片段，通常是一个模块或函数。实际应用中会将代码拆分成若干个小的组件，这也意味着你会写很多的单元测试用例来保证代码的功能正常。</p>
+<p>前端开发中的单元测试工具有 <a target="_blank" rel="noopener" href="https://facebook.github.io/jest/zh-Hans/">jest</a>、<a target="_blank" rel="noopener" href="https://mochajs.org/">mocha</a>、<a target="_blank" rel="noopener" href="https://jasmine.github.io/">jasmine</a> 和 <a target="_blank" rel="noopener" href="https://qunitjs.com/">qunit</a>。</p>
+<h2 id="1-3-E2E-测试"><a href="#1-3-E2E-测试" class="headerlink" title="1.3. E2E 测试"></a>1.3. E2E 测试</h2><p><strong>E2E</strong>（end to end）测试即<strong>端到端测试</strong>是，也称冒烟测试，用于测试真实浏览器环境下前端应用的流程和表现，相当于代替人工去操作应用。E2E 测试是一个边界比较模糊的概念，有以下几个特点：</p>
+<ul>
+<li>把整个系统当作一个黑盒</li>
+<li>测试人员模拟真实用户在浏览器中操作UI</li>
+<li>测试出的问题可能是前端也可能是后端导致的</li>
+</ul>
+<p>常见的 E2E 测试工具有 <a target="_blank" rel="noopener" href="http://www.nightmarejs.org/">nightmare</a>、nightwatch 和 <a target="_blank" rel="noopener" href="https://github.com/googlechrome/puppeteer">puppeteer</a>。</p>
+<h2 id="1-4-单元测试和-E2E-测试的对比"><a href="#1-4-单元测试和-E2E-测试的对比" class="headerlink" title="1.4. 单元测试和 E2E 测试的对比"></a>1.4. 单元测试和 E2E 测试的对比</h2><p>单元测试的概念出现已久，相关的工具体系也已经十分完善，但是单元测试的维护成本较高，并且对于前端测试来说有很多需求无法满足。此外，单元测试需要较多的角度完善的测试用例支持，且这些测试用例都是较为简单的，针对每一个小模块或者组建的输入与输出。</p>
+<p>E2E 测试针对具体的测试环境条件来编写测试用例，一般情况下测试用例不会太多.</p>
+<h2 id="1-5-TDD-和-BDD"><a href="#1-5-TDD-和-BDD" class="headerlink" title="1.5. TDD 和 BDD"></a>1.5. TDD 和 BDD</h2><p><strong>TDD</strong>（Test Drive Development）即<strong>测试驱动开发</strong>。简单的说就是先根据需求写测试用例，再代码实现，接着测试，循环此过程直到产品的实现。可以看出来，TDD 的基本思路就是通过测试来推动整个开发的进行，但测试驱动开发并不只是单纯的测试工作，而是把需求分析，设计，质量控制量化的过程。</p>
+<p><strong>BDD</strong>（Behavior Drive Development）即<strong>行为驱动开发</strong>，BDD 可以看作是对 TDD 的一种补充，或者说是 TDD 的一个分支。在TDD中，我们并不能完全保证根据设计所编写的测试就是用户所期望的功能。BDD将这一部分简单和自然化，用自然语言来描述，让开发、测试、BA以及客户都能在这个基础上达成一致。BDD 更加依赖于需求行为和文档来驱动开发，这些文档的描述跟测试代码很相似。</p>
+<p>通过对比，TDD 通过测试来推动整个开发的进行。这有助于编写简洁可用和高质量的代码，并加速实际开发过程，可能导致的问题是需求和开发脱节，实际产品与用户所需要的功能并不匹配。而 BDD 通过鼓励项目中的开发者、QA 和非技术人员或商业参与者之间进行协作，确保程序实现效果与用户需求一致。</p>
+<p>可以看出 <strong>E2E 测试</strong>更多的是换和 <strong>BDD</strong> 的开发模式进行结合,实际应用用会将 E2E 的测试工具和 BDD 测试框架进行结合。</p>
+<h1 id="2-Nightmare"><a href="#2-Nightmare" class="headerlink" title="2. Nightmare"></a>2. Nightmare</h1><h2 id="2-1-基本介绍"><a href="#2-1-基本介绍" class="headerlink" title="2.1.基本介绍"></a>2.1.基本介绍</h2><p>Nightmare 是一个基于 electron 的浏览器自动化代码库，用于实现爬虫或自动化测试。相较于传统的爬虫框架（scrapy/pyspider），或者dom操作库（cheerio/jsdom），或者基于浏览器的自动化框架（selenium/phantomjs），他的优势在于提供了一个<strong>简洁有效</strong>的编程模型。</p>
+<p>官网给出的实现一个向yahoo自动提交关键词并搜索的功能如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">yield</span> Nightmare()</span><br><span class="line">  .goto(<span class="string">&#x27;http://yahoo.com&#x27;</span>)</span><br><span class="line">  .type(<span class="string">&#x27;input[title=&quot;Search&quot;]&#x27;</span>, <span class="string">&#x27;github nightmare&#x27;</span>)</span><br><span class="line">  .click(<span class="string">&#x27;.searchsubmit&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="2-2-相关-API"><a href="#2-2-相关-API" class="headerlink" title="2.2. 相关 API"></a>2.2. 相关 API</h2><p>基本的交互 API 包括：</p>
+<ul>
+<li><code>goto(url[, headers])</code> 跳转到url</li>
+<li><code>viewport(width,</code> height) 浏览器窗口大小</li>
+<li><code>wait(selector)</code> 等待某个dom元素出现</li>
+<li><code>click(selector)</code> 点击某个dom元素</li>
+<li><code>type(selector[, text])</code> 在某个dom元素中输入</li>
+<li><code>inject(type, file)</code> 在页面上挂载 js/css 文件内容</li>
+<li><code>evaluate(fn[, arg1, arg2,...])</code> 在客户端注入JS脚本并执行，从而实现electron模型下的C/S互动及数据交换</li>
+<li>……</li>
+</ul>
+<h2 id="2-3-实例"><a href="#2-3-实例" class="headerlink" title="2.3. 实例"></a>2.3. 实例</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Nightmare <span class="keyword">from</span> <span class="string">&#x27;nightmare&#x27;</span>;</span><br><span class="line"></span><br><span class="line">describe(<span class="string">&#x27;Login&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> page;</span><br><span class="line">  beforeEach(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    page = Nightmare();</span><br><span class="line">    page.goto(<span class="string">&#x27;http://localhost:8000/#/user/login&#x27;</span>);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  it(<span class="string">&#x27;should login with failure&#x27;</span>, <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">    <span class="keyword">await</span> page.type(<span class="string">&#x27;#userName&#x27;</span>, <span class="string">&#x27;mockuser&#x27;</span>)</span><br><span class="line">      .type(<span class="string">&#x27;#password&#x27;</span>, <span class="string">&#x27;wrong_password&#x27;</span>)</span><br><span class="line">      .click(<span class="string">&#x27;button[type=&quot;submit&quot;]&#x27;</span>)</span><br><span class="line">      .wait(<span class="string">&#x27;.ant-alert-error&#x27;</span>) <span class="comment">// should display error</span></span><br><span class="line">      .end();</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  it(<span class="string">&#x27;should login successfully&#x27;</span>, <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> text = <span class="keyword">await</span> page.type(<span class="string">&#x27;#userName&#x27;</span>, <span class="string">&#x27;admin&#x27;</span>)</span><br><span class="line">      .type(<span class="string">&#x27;#password&#x27;</span>, <span class="string">&#x27;888888&#x27;</span>)</span><br><span class="line">      .click(<span class="string">&#x27;button[type=&quot;submit&quot;]&#x27;</span>)</span><br><span class="line">      .wait(<span class="string">&#x27;.ant-layout-sider h1&#x27;</span>) <span class="comment">// should display error</span></span><br><span class="line">      .evaluate(<span class="function">() =&gt;</span> <span class="built_in">document</span>.body.innerHTML)</span><br><span class="line">      .end();</span><br><span class="line">    expect(text).toContain(<span class="string">&#x27;&lt;h1&gt;Ant Design Pro&lt;/h1&gt;&#x27;</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> expect = <span class="built_in">require</span>(<span class="string">&#x27;chai&#x27;</span>).expect;</span><br><span class="line"><span class="keyword">const</span> Nightmare = <span class="built_in">require</span>(<span class="string">&#x27;nightmare&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> assert = <span class="built_in">require</span>(<span class="string">&#x27;assert&#x27;</span>);</span><br><span class="line"></span><br><span class="line">describe(<span class="string">&#x27;simulate search&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">　　<span class="built_in">this</span>.timeout(<span class="string">&#x27;30s&#x27;</span>)</span><br><span class="line"> </span><br><span class="line">　　<span class="keyword">let</span> nightmare = <span class="literal">null</span></span><br><span class="line">　　beforeEach(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">　　　　<span class="comment">// 设置显示模拟弹框</span></span><br><span class="line">　　　　nightmare = <span class="keyword">new</span> Nightmare(&#123;</span><br><span class="line">　　　　show: <span class="literal">true</span>,</span><br><span class="line">　　　&#125;)</span><br><span class="line">　　&#125;)</span><br><span class="line"> </span><br><span class="line">　　it(<span class="string">&#x27;模拟用户搜索&#x27;</span>, <span class="function"><span class="params">done</span> =&gt;</span> &#123;</span><br><span class="line">　　　　nightmare</span><br><span class="line">　　　　.goto(<span class="string">&#x27;https://www.baidu.com/&#x27;</span>)  <span class="comment">//设置搜索引擎</span></span><br><span class="line">　　　　.viewport(<span class="number">1200</span>, <span class="number">672</span>) 　 <span class="comment">//设置弹框视口宽高　　　　　　　　</span></span><br><span class="line">　　　　.type(<span class="string">&#x27;form[action*=&quot;/s&quot;] [name=wd]&#x27;</span>, <span class="string">&#x27;github nightmare&#x27;</span>)   <span class="comment">//获取搜索框，自动填充搜索内容</span></span><br><span class="line">　　　　.click(<span class="string">&#x27;form[action*=&quot;/s&quot;] [type=submit]&#x27;</span>)  <span class="comment">//获取点击按钮，模拟点击</span></span><br><span class="line">　　　　.wait(<span class="number">5000</span>) <span class="comment">//等待5s(可为dom节点)，获取第一条的信息的内容</span></span><br><span class="line">　　　　.evaluate(<span class="function">() =&gt;</span></span><br><span class="line">　　　　　<span class="built_in">document</span>.querySelector(<span class="string">&#x27;#content_left .c-container a em&#x27;</span>).innerHTML</span><br><span class="line">　　　　)</span><br><span class="line">　　　　.end()</span><br><span class="line">　　　　.then(<span class="function"><span class="params">content</span> =&gt;</span> &#123;</span><br><span class="line">　　　　　<span class="built_in">console</span>.log(content === <span class="string">&#x27;Nightmare&#x27;</span>,<span class="string">&#x27;-----&gt;true&#x27;</span>)  <span class="comment">//输出结果</span></span><br><span class="line">		  done();</span><br><span class="line">　　　　&#125;)</span><br><span class="line">　　　　.catch(<span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">　　　　　<span class="built_in">console</span>.error(<span class="string">&#x27;Search failed:&#x27;</span>, error);  <span class="comment">//输出捕捉到的错误</span></span><br><span class="line">		  done();</span><br><span class="line">　　　　&#125;);</span><br><span class="line">　　&#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>参考：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000008915567">测试你的前端代码 - part3（端到端测试）</a></li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/06/07/map-usebook/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          前端地图基本原理
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/02/base64-convert-to-upload/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Base64 图片数据转换上传</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="e2e-test-n-nightmare" data-title="E2E 测试与自动化测试工具 Nightmare" data-url="http://yoursite.com/2018/03/29/e2e-test-n-nightmare/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2021 Sinker
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

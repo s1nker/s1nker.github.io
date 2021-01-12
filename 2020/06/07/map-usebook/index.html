@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>前端地图基本原理 | 小狒sin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前端地图基本原理1. 基本概念1-1. 经纬度的描述地球是一个椭球，Datum 是一组用于描述这个椭球的数据集合。最常用的一个 Datum 是 WGS84 (World Geodetic System 1984)，它的主要参数有：  坐标系的原点是地球质心（center of mass） 子午线（meridian），即零度经线，位于格林威治子午线 Royal Observatory 所在纬度往东">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端地图基本原理">
+<meta property="og:url" content="http://yoursite.com/2020/06/07/map-usebook/index.html">
+<meta property="og:site_name" content="小狒sin">
+<meta property="og:description" content="前端地图基本原理1. 基本概念1-1. 经纬度的描述地球是一个椭球，Datum 是一组用于描述这个椭球的数据集合。最常用的一个 Datum 是 WGS84 (World Geodetic System 1984)，它的主要参数有：  坐标系的原点是地球质心（center of mass） 子午线（meridian），即零度经线，位于格林威治子午线 Royal Observatory 所在纬度往东">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tvax3.sinaimg.cn/large/6f4890d4gy1gml736pl3dj20lz0abacn.jpg">
+<meta property="og:image" content="https://tvax1.sinaimg.cn/large/6f4890d4gy1gml73igva7j20m809tq5m.jpg">
+<meta property="og:image" content="https://tva4.sinaimg.cn/large/6f4890d4gy1gml73sflzwj20m80azjzd.jpg">
+<meta property="og:image" content="https://tvax3.sinaimg.cn/large/6f4890d4gy1gml7430o2xj20m80lk48f.jpg">
+<meta property="og:image" content="https://tvax3.sinaimg.cn/large/6f4890d4gy1gml74b6kwbj217f0ot0vb.jpg">
+<meta property="og:image" content="https://tva2.sinaimg.cn/large/6f4890d4gy1gml74is7huj20co08aaa5.jpg">
+<meta property="article:published_time" content="2020-06-06T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-01-12T12:51:47.503Z">
+<meta property="article:author" content="Sinker">
+<meta property="article:tag" content="地图">
+<meta property="article:tag" content="Geoserver">
+<meta property="article:tag" content="leaflet">
+<meta property="article:tag" content="openlayers">
+<meta property="article:tag" content="SLD">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tvax3.sinaimg.cn/large/6f4890d4gy1gml736pl3dj20lz0abacn.jpg">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://tva4.sinaimg.cn/large/6f4890d4gy1gml6uophvsj20m60m6mz3.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/"></a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/s1nker" title="github">github</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/sin-chaw" title="zhihu">zhihu</a>
+					        
+								<a class="douban" target="_blank" href="https://www.douban.com/people/56917679/" title="douban">douban</a>
+					        
+								<a class="mail" target="_blank" href="mailto:s1nker@126.com" title="mail">mail</a>
+					        
+								<a class="linkedin" target="_blank" href="https://cn.linkedin.com/in/s1nker" title="linkedin">linkedin</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Base64/" style="font-size: 10px;">Base64</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/E2E-%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">E2E 测试</a> <a href="/tags/ES6/" style="font-size: 15px;">ES6</a> <a href="/tags/FormData/" style="font-size: 10px;">FormData</a> <a href="/tags/Geoserver/" style="font-size: 10px;">Geoserver</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/Nightmare/" style="font-size: 10px;">Nightmare</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/React-fiber/" style="font-size: 10px;">React fiber</a> <a href="/tags/React-%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">React 源码学习</a> <a href="/tags/SLD/" style="font-size: 10px;">SLD</a> <a href="/tags/Safari/" style="font-size: 10px;">Safari</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/development-docs/" style="font-size: 10px;">development docs</a> <a href="/tags/feeling/" style="font-size: 10px;">feeling</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/js%E5%AF%B9%E8%B1%A1/" style="font-size: 10px;">js对象</a> <a href="/tags/leaflet/" style="font-size: 10px;">leaflet</a> <a href="/tags/life/" style="font-size: 15px;">life</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/openlayers/" style="font-size: 10px;">openlayers</a> <a href="/tags/%E4%BD%9C%E7%94%A8%E5%9F%9F/" style="font-size: 10px;">作用域</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a> <a href="/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">单元测试</a> <a href="/tags/%E5%9C%B0%E5%9B%BE/" style="font-size: 10px;">地图</a> <a href="/tags/%E6%B7%B1%E6%8B%B7%E8%B4%9D/" style="font-size: 10px;">深拷贝</a> <a href="/tags/%E7%BB%84%E4%BB%B6%E5%B0%81%E8%A3%85/" style="font-size: 10px;">组件封装</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">自动化测试</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">热爱分享，乐于折腾的前端程序猿，脑洞有点大！</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide"></h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="https://tva4.sinaimg.cn/large/6f4890d4gy1gml6uophvsj20m60m6mz3.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author"></h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/s1nker" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/sin-chaw" title="zhihu">zhihu</a>
+			        
+						<a class="douban" target="_blank" href="https://www.douban.com/people/56917679/" title="douban">douban</a>
+			        
+						<a class="mail" target="_blank" href="mailto:s1nker@126.com" title="mail">mail</a>
+			        
+						<a class="linkedin" target="_blank" href="https://cn.linkedin.com/in/s1nker" title="linkedin">linkedin</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-map-usebook" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/06/07/map-usebook/" class="article-date">
+  	<time datetime="2020-06-06T16:00:00.000Z" itemprop="datePublished">2020-06-07</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      前端地图基本原理
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Geoserver/" rel="tag">Geoserver</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SLD/" rel="tag">SLD</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leaflet/" rel="tag">leaflet</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openlayers/" rel="tag">openlayers</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9C%B0%E5%9B%BE/" rel="tag">地图</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="前端地图基本原理"><a href="#前端地图基本原理" class="headerlink" title="前端地图基本原理"></a>前端地图基本原理</h1><h2 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1. 基本概念"></a>1. 基本概念</h2><h3 id="1-1-经纬度的描述"><a href="#1-1-经纬度的描述" class="headerlink" title="1-1. 经纬度的描述"></a>1-1. 经纬度的描述</h3><p>地球是一个椭球，Datum 是一组用于描述这个椭球的数据集合。最常用的一个 Datum 是 WGS84 (World Geodetic System 1984)，它的主要参数有：</p>
+<ul>
+<li>坐标系的原点是<strong>地球质心</strong>（center of mass）</li>
+<li><strong>子午线</strong>（meridian），即零度经线，位于格林威治子午线 Royal Observatory 所在纬度往东 102.5米 所对应的的经线圈</li>
+<li>椭球截面长轴为 a=6378137米</li>
+<li>椭圆截面短轴为 b=6356752.3142米，可选参数</li>
+<li>扁平比例（flattening）f=(a−b)/a=1/298.257223563</li>
+<li>geoid，即海平面，用于定义高度</li>
+</ul>
+<h3 id="1-2-像素坐标系"><a href="#1-2-像素坐标系" class="headerlink" title="1-2. 像素坐标系"></a>1-2. 像素坐标系</h3><p>像素坐标系，也可以成为屏幕坐标系，像素坐标系和地图的经纬度坐标系存在对应关系，屏幕上的每一个像素都对应一个经纬度点位置。 不同缩放级别下，像素坐标系和经纬度坐标系的对应关系是不同的。</p>
+<h3 id="1-3-投影"><a href="#1-3-投影" class="headerlink" title="1-3. 投影"></a>1-3. 投影</h3><p>地图投影是利用一定数学法则把地球表面的经、纬线转换到平面上的理论和方法。由于地球是一个赤道略宽两极略扁的不规则的梨形球体，故其表面是一个不可展平的曲面，所以运用任何数学方法进行这种转换都会产生误差和变形，为按照不同的需求缩小误差，就产生了各种投影方法。</p>
+<p><img src="https://tvax3.sinaimg.cn/large/6f4890d4gy1gml736pl3dj20lz0abacn.jpg" alt="map_projection"></p>
+<p>关于投影我们只需要了解<strong>墨卡托投影</strong>（正轴等角圆柱投影）</p>
+<h3 id="1-4-墨卡托投影"><a href="#1-4-墨卡托投影" class="headerlink" title="1-4. 墨卡托投影"></a>1-4. 墨卡托投影</h3><p><strong>墨卡托投影</strong>，是正轴等角圆柱投影。由荷兰地图学家墨卡托 (G.Mercator) 于 1569 年创立。假想一个与地轴方向一致的圆柱切或割于地球，按等角条件，将经纬网投影到圆柱面上，将圆柱面展为平面后，即得本投影。等角条件是使地球面上微分区域内两个方向的夹角投影到平面以后，保持角度不变的条件。</p>
+<p>而 <strong>Web 墨卡托投影</strong>（又称球体墨卡托投影）是墨卡托投影的变种，它接收的输入是 Datum 为 WGS84 的经纬度，但在投影时不再把地球当做椭球而当做半径为 6378137 米的标准球体，以简化计算。</p>
+<p><img src="https://tvax1.sinaimg.cn/large/6f4890d4gy1gml73igva7j20m809tq5m.jpg" alt="mercator_projection"></p>
+<p>Web 墨卡托投影的两个投影标准：</p>
+<ul>
+<li>EPSG4326：Web 墨卡托投影后的平面地图，但仍然使用 WGS84 的经度、纬度表示坐标；</li>
+<li>EPSG3857：Web 墨卡托投影后的平面地图，坐标单位为米。</li>
+</ul>
+<p>这两个投影标准在我们调用 geoserver 的服务时可能会用到，所以简单了解即可。</p>
+<h3 id="1-5-瓦片"><a href="#1-5-瓦片" class="headerlink" title="1-5. 瓦片"></a>1-5. 瓦片</h3><p>经过投影后，地图就变为平面的一张地图。考虑到有时候我们需要看宏观的地图信息（如世界地图里每个国家的国界），有时候又要看很微观的地图信息（如导航时道路的路况信息）。为此，我们对这张地图进行等级切分。在最高级 (zoom=0)，需要的信息最少，只需保留最重要的宏观信息，因此用一张 256x256 像素的图片表示即可；在下一级 (zoom=1)，信息量变多，用一张 512x512 像素的图片表示；以此类推，级别越低的像素越高，下一级的像素是当前级的4倍。这样从最高层级往下到最低层级就形成了一个金字塔坐标体系。</p>
+<p>对每张图片，我们将其切分为 256x256 的图片，称为<strong>瓦片</strong>（Tile）。这样，在最高级 (zoom=0) 时，只有一个瓦片；在下一级 (zoom=1) 时有4个瓦片；在下一级 (zoom=2) 时有16个瓦片，以此类推。</p>
+<p><img src="https://tva4.sinaimg.cn/large/6f4890d4gy1gml73sflzwj20m80azjzd.jpg" alt="conversion_of_coordinates"></p>
+<h3 id="1-6-瓦片的编号"><a href="#1-6-瓦片的编号" class="headerlink" title="1-6. 瓦片的编号"></a>1-6. 瓦片的编号</h3><p>瓦片生成后，就是一堆图片。怎么对这堆图片进行编号，是目前主流互联网地图商分歧最大的地方。总结起来分为四个流派：</p>
+<ul>
+<li>谷歌 XYZ：Z 表示缩放层级，Z=zoom；XY 的原点在左上角，X 从左向右，Y 从上向下。</li>
+<li>TMS：开源产品的标准，Z 的定义与谷歌相同；XY 的原点在左下角，X 从左向右，Y 从下向上。</li>
+<li>QuadTree：微软 Bing 地图使用的编码规范，Z 的定义与谷歌相同，同一层级的瓦片不用 XY 两个维度表示，而只用一个整数表示，该整数服从四叉树编码规则</li>
+<li>百度 XYZ：Z 从 1 开始，在最高级就把地图分为四块瓦片；XY 的原点在经度为 0 纬度位 0 的位置，X 从左向右，Y 从下向上</li>
+</ul>
+<p><img src="https://tvax3.sinaimg.cn/large/6f4890d4gy1gml7430o2xj20m80lk48f.jpg" alt="tile_coding"></p>
+<h2 id="2-Geoserver"><a href="#2-Geoserver" class="headerlink" title="2. Geoserver"></a>2. Geoserver</h2><p>先看一段官方的介绍：</p>
+<blockquote>
+<p><strong>GeoServer</strong> 是基于 Java 的软件服务器，允许用户查看和编辑地理空间数据。使用开放地理空间联盟（OGC）提出的开放标准，GeoServer 在地图创建和数据共享方面具有极大的灵活性。<br>GeoServer 允许您向世界显示您的空间信息。实施Web地图服务 (WMS) 标准，GeoServer 可以创建各种输出格式的地图。一个免费的地图库 <strong>OpenLayers</strong> 已集成到 GeoServer 中，从而使地图生成快速简便。<br>GeoServer 符合 Web Feature Service（WFS）标准和 Web Coverage Service（WCS）标准，该标准允许共享和编辑用于生成地图的数据。GeoServer 还使用 Web Map Tile Service 标准将您发布的地图拆分为图块，以方便Web地图和移动应用程序使用。</p>
+</blockquote>
+<p>GeoServer 使用的是图层与图层组的概念。将在服务器上准备发布为服务的数据定义为一组数据集，然后规定在发布为Web服务时的一些参数。Geoserve 提供了操作界面来管理各种配置：</p>
+<p><img src="https://tvax3.sinaimg.cn/large/6f4890d4gy1gml74b6kwbj217f0ot0vb.jpg" alt="geoserver_page"></p>
+<h2 id="3-leaflet-和-openlayers"><a href="#3-leaflet-和-openlayers" class="headerlink" title="3. leaflet 和 openlayers"></a>3. leaflet 和 openlayers</h2><p>上文说到的 <strong>openlayers</strong> 和 <strong>leaflet</strong> 都是用于在 Web 上创建交互式地图，可以显示从任何来源加载的地图图块、矢量数据和标记。</p>
+<p>这里的两者都是开源的，相比起来 leaflet 更加轻量，适合移动端的场景，如果只是相对简单的地图需求，使用 leaflet 会是一个合适的选择。而 openlayers 具有数量更大，更复杂的 API。而 geoserver 提供的服务，对  leaflet 和 openlayers 都是支持的。</p>
+<h2 id="4-调用-geoserver-的服务"><a href="#4-调用-geoserver-的服务" class="headerlink" title="4. 调用 geoserver 的服务"></a>4. 调用 geoserver 的服务</h2><h3 id="4-1-调用-WMS"><a href="#4-1-调用-WMS" class="headerlink" title="4-1. 调用 WMS"></a>4-1. 调用 WMS</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> wmsLayer = <span class="built_in">Map</span>.tileLayer.wms(</span><br><span class="line">  <span class="string">&#x27;http://gsmap.sf-express.com/geoserver/sfmap/wms&#x27;</span>,</span><br><span class="line">  &#123;</span><br><span class="line">    type: <span class="string">&#x27;tile&#x27;</span>,</span><br><span class="line">    layers: <span class="string">&#x27;map:example_layer&#x27;</span>,</span><br><span class="line">    version: <span class="string">&#x27;1.1.1&#x27;</span>,</span><br><span class="line">    format: <span class="string">&#x27;image/png&#x27;</span>,</span><br><span class="line">    request: <span class="string">&#x27;GetMap&#x27;</span>,</span><br><span class="line">    transparent: <span class="string">&#x27;true&#x27;</span>,</span><br><span class="line">    zoom: [<span class="number">3</span>, <span class="number">20</span>],</span><br><span class="line">    zIndex: <span class="number">5</span>,</span><br><span class="line">    sld_body: getSld(<span class="string">&#x27;sfmap:dept_3&#x27;</span>, <span class="built_in">this</span>.cateMapData),</span><br><span class="line"> &#125;,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="built_in">this</span>.mapIns.addLayer(wmsLayer)</span><br></pre></td></tr></table></figure>
+<p>此处使用 <code>Map.tileLayer.wms(url, params)</code> 调用来自 geoserver 的 WMS 服务，使用的参数如下：</p>
+<ul>
+<li><strong>url</strong>：请求的 geoserver 服务地址</li>
+<li><strong>params</strong>：请求的目标图层相关配置参数，<code>layers</code> 为请求的图层名，在 geoserver 服务中不同维度的地图图层对应不同的名字，在这里的 <code>dept_3</code> 表示业务区的地图图层；<code>request</code> 表示此处调用的是 geoserver 的获取地图图层的服务；<code>format</code> 和 <code>tranparent</code>表示请求的瓦片图文件格式及背景是否透明； 而 <code>sld_body</code> 则是需要自定义的 SLD 样式</li>
+</ul>
+<h3 id="4-2-配置-SLD"><a href="#4-2-配置-SLD" class="headerlink" title="4-2. 配置 SLD"></a>4-2. 配置 SLD</h3><p>对于 WMS 返回的地图图层，可以针对之进行样式的自定义，geoserver 支持多种方法定义图层样式，<strong>SLD</strong> 就是其中一种。</p>
+<blockquote>
+<p>SLD (Style Layer Descriptor) 是2005年OGC提出的一个标准，这个标准在一定条件下允许WMS服务器对地图可视化的表现形式进行扩展。该 SLD 规范是采用XML定义地图显示样式，通过自定义SLD来配置地图图层渲染的可视化风格，可以设置过滤器，自定义图例等。</p>
+</blockquote>
+<p><img src="https://tva2.sinaimg.cn/large/6f4890d4gy1gml74is7huj20co08aaa5.jpg" alt="SLD_structure"></p>
+<p>如果我们想要自定义图层的样式，肯定会用到的元素包括：</p>
+<ul>
+<li><p><strong>FeatureTypeStyle</strong>：这一部分是整个样式文档的根节点，并说明什么是它的样式将被应用的特征类型。FeatureTypeStyle 包含一个或者多个 Rule 元素，Rule 元素允许有条件的映射。</p>
+</li>
+<li><p><strong>RULE</strong>（规则）：规则是根据属性条件和地图比例尺来对要素进行分组渲染，一般 RULE 中只允许渲染一种类型的要素，即点，线，面等其中的一种，但是可以和注记同时使用。</p>
+</li>
+<li><p><strong>Symbolizer</strong>（符号）：Symbolizer 指定数据应该如何可视化，在1.0的标准中包含五忠类型的Symbolizer，分别是PointSymbolizer（点符号）、LineSymbolizer（线符号）、PloygonSymbolizer（面符号）、TextSymbolizer（注记）、RasterSymbolizer（栅格）。</p>
+</li>
+</ul>
+<p>除了一些预设的匹配规则，SLD 还提供了一些 <code>Function</code> 可应用于较为负责的筛选。</p>
+<p>以实际应用举例，见以下代码：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Rule</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ogc:Filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ogc:PropertyIsEqualTo</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">ogc:Function</span> <span class="attr">name</span>=<span class="string">&quot;in&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ogc:PropertyName</span>&gt;</span>code<span class="tag">&lt;/<span class="name">ogc:PropertyName</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>591Y<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>592Y<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>595Y<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>791Y<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">ogc:Function</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">ogc:Literal</span>&gt;</span>true<span class="tag">&lt;/<span class="name">ogc:Literal</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ogc:PropertyIsEqualTo</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ogc:Filter</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">PolygonSymbolizer</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Fill</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">CssParameter</span> <span class="attr">name</span>=<span class="string">&quot;fill&quot;</span>&gt;</span>#7ba7ee<span class="tag">&lt;/<span class="name">CssParameter</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">CssParameter</span> <span class="attr">name</span>=<span class="string">&quot;fill-opacity&quot;</span>&gt;</span>0.7<span class="tag">&lt;/<span class="name">CssParameter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">Fill</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Stroke</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">CssParameter</span> <span class="attr">name</span>=<span class="string">&quot;stroke&quot;</span>&gt;</span>#727D71<span class="tag">&lt;/<span class="name">CssParameter</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">CssParameter</span> <span class="attr">name</span>=<span class="string">&quot;stroke-width&quot;</span>&gt;</span>0.4<span class="tag">&lt;/<span class="name">CssParameter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">Stroke</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">PolygonSymbolizer</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Rule</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这段 SLD 表示对数据对象进行筛选匹配，当对象的 code 属性为 591Y、592Y、595Y 和 791Y 四者的其一时，适用后续的样式。后续的样式表示对应的 PolygonSymbolizer 元素适用了 Fill 和 Stroke 的样式，具体的样式属性分别是填充颜色、填充透明度、边界颜色和边界宽度。</p>
+<p>这里需要留意的是任何 Function 元素都会有一个返回值， <code>&lt;ogc:Function name=&quot;in&quot;&gt;&lt;/ogc:Function&gt;</code> 对应的返回值是一个 Boolean 值，所以需要在后面紧跟 <code>&lt;ogc:Literal&gt;true&lt;/ogc:Literal&gt;</code> 来对应返回值的匹配。</p>
+<h3 id="4-3-获取点击位置所属业务区"><a href="#4-3-获取点击位置所属业务区" class="headerlink" title="4-3. 获取点击位置所属业务区"></a>4-3. 获取点击位置所属业务区</h3><p>还是看例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 监听地图的点击事件</span></span><br><span class="line"><span class="built_in">this</span>.mapIns.on(<span class="string">&#x27;click&#x27;</span>, getClickFeature)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">getClickFeature</span>(<span class="params">e</span>)</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> vm = <span class="built_in">this</span></span><br><span class="line">  <span class="keyword">const</span> &#123; containerPoint &#125; = e</span><br><span class="line">  <span class="keyword">const</span> bbox = <span class="built_in">this</span>.mapIns.getBounds().toBBoxString()</span><br><span class="line">  <span class="keyword">const</span> size = <span class="built_in">this</span>.mapIns.getSize()</span><br><span class="line">  <span class="keyword">const</span> url =</span><br><span class="line">    <span class="string">`http://gsmap.sf-express.com/geoserver/sfmap/wms`</span> +</span><br><span class="line">    <span class="string">`?SERVICE=WMS&amp;VERSION=1.1.1&amp;REQUEST=GetFeatureInfo&amp;`</span> +</span><br><span class="line">    <span class="string">`FORMAT=image%2Fpng&amp;TRANSPARENT=true&amp;QUERY_LAYERS=map%3Aexample_layer`</span> +</span><br><span class="line">    <span class="string">`&amp;LAYERS=sfmap%3Adept_3&amp;CRS=EPSG%3A4326&amp;`</span> +</span><br><span class="line">    <span class="string">`INFO_FORMAT=text%2Fjavascript&amp;FEATURE_COUNT=1000`</span> +</span><br><span class="line">    <span class="string">`&amp;X=<span class="subst">$&#123;containerPoint.x&#125;</span>&amp;Y=<span class="subst">$&#123;containerPoint.y&#125;</span>`</span> +</span><br><span class="line">    <span class="string">`&amp;WIDTH=<span class="subst">$&#123;size.x&#125;</span>&amp;HEIGHT=<span class="subst">$&#123;size.y&#125;</span>`</span> +</span><br><span class="line">    <span class="string">`&amp;SRS=EPSG%3A4326&amp;STYLES=&amp;BBOX=<span class="subst">$&#123;bbox&#125;</span>`</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">getResult</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (res) &#123;</span><br><span class="line">      <span class="comment">// 根据返回的数据结构区域编码</span></span><br><span class="line">      <span class="keyword">const</span> &#123; features &#125; = res</span><br><span class="line">      <span class="keyword">if</span> (features.length) &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;</span><br><span class="line">          properties: &#123; code &#125;,</span><br><span class="line">        &#125; = features[<span class="number">0</span>]</span><br><span class="line">        vm.$emit(<span class="string">&#x27;areaClick&#x27;</span>, code) <span class="comment">// 获取到点击位置所属的业务区</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">this</span>.jsonp(url, getResult) <span class="comment">// 通过 jsonp 的方式跨域</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>geoserver 的 GetFeatureInfo 服务支持通过 jsonp 的方式调用，通过组装地址的方式就可以实现请求获取点击位置的所属业务区了，简单看一下请求参数：</p>
+<ul>
+<li><strong>CRS</strong> Coordinate Reference System, 即上文提到的投影标准，这里使用的是 EPSG4326</li>
+<li><strong>INFO_FORMAT</strong> 使用 jsonp 调用所需要的传参</li>
+<li><strong>FEATURE_COUNT</strong> 查询命中的数据对象取数上限</li>
+<li><strong>X</strong>, <strong>Y</strong> 在地图上的点击坐标，以地图容器左上为原点的坐标值</li>
+<li><strong>WIDTH</strong>, <strong>HEIGHT</strong> 地图容器的尺寸</li>
+<li><strong>BBOX</strong> Bounds Box, 当前所显示地图的四个角对应的经纬度</li>
+</ul>
+<p>geoserver 主要是通过 X, Y, WIDTH, HEIGHT 和 BBOX 来定位到具体的点击位置，需要注意受限于地图缩放等级和容器大小等因素，最终的返回值可能不止一个。</p>
+<blockquote>
+<p><strong>扩展参考：</strong><br><a target="_blank" rel="noopener" href="https://leafletjs.com/">Leaflet - a JavaScript library for interactive maps</a><br><a target="_blank" rel="noopener" href="https://openlayers.org/">OpenLayers - A high-performance, feature-packed library for all your mapping needs.</a><br><a target="_blank" rel="noopener" href="https://docs.geoserver.org/latest/en/user/styling/sld/index.html">SLD Styling — GeoServer 2.19.x User Manual</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/tuboshu/p/10752292.html">GeoServer中使用SLD样式</a><br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/e9e83b427045">瓦片地图原理</a></p>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/12/16/fiber-learning/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          React Fiber 浅析
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/29/e2e-test-n-nightmare/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">E2E 测试与自动化测试工具 Nightmare</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="map-usebook" data-title="前端地图基本原理" data-url="http://yoursite.com/2020/06/07/map-usebook/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2021 Sinker
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
