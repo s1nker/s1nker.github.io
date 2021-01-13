@@ -195,7 +195,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="React-Fiber-浅析"><a href="#React-Fiber-浅析" class="headerlink" title="React Fiber 浅析"></a>React Fiber 浅析</h1><p><img src="https://tva2.sinaimg.cn/large/6f4890d4gy1gml763tfnhj20rs0igdgy.jpg" alt="react-fiber"></p>
+        <p><img src="https://tva2.sinaimg.cn/large/6f4890d4gy1gml763tfnhj20rs0igdgy.jpg" alt="react-fiber"></p>
 <h2 id="1-Background"><a href="#1-Background" class="headerlink" title="1. Background"></a>1. Background</h2><p>我们知道从广义上来讲，浏览器是单线程的，它将 GUI 描绘，时间器处理，事件处理，js 执行，远程资源加载统统放在一起。在 React 15 及之前的版本，React 在对组件进行更新时，如果需要渲染更新的组件过于庞大，js 执行就会长时间占据主线程，导致页面的响应变慢。当然 React 也提供了优化的手段（<code>shouldComponentUpdate</code>），但是这种优化方式更多是依赖于使用者自身，这种单纯的人肉优化并没有很好地改善这种情况。</p>
 <h2 id="2-一些前置概念"><a href="#2-一些前置概念" class="headerlink" title="2. 一些前置概念"></a>2. 一些前置概念</h2><h3 id="2-1-Renderers（渲染器）和-Reconcilers（协调器）"><a href="#2-1-Renderers（渲染器）和-Reconcilers（协调器）" class="headerlink" title="2-1. Renderers（渲染器）和 Reconcilers（协调器）"></a>2-1. Renderers（渲染器）和 Reconcilers（协调器）</h3><p>React 最开始服务于 DOM，后来又有了支持原生平台的 React Native，为了区分开这两者，React 内部提出了“**渲染器 (Renderers)**”的概念。</p>
 <blockquote>
@@ -362,7 +362,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="前端地图基本原理"><a href="#前端地图基本原理" class="headerlink" title="前端地图基本原理"></a>前端地图基本原理</h1><h2 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1. 基本概念"></a>1. 基本概念</h2><h3 id="1-1-经纬度的描述"><a href="#1-1-经纬度的描述" class="headerlink" title="1-1. 经纬度的描述"></a>1-1. 经纬度的描述</h3><p>地球是一个椭球，Datum 是一组用于描述这个椭球的数据集合。最常用的一个 Datum 是 WGS84 (World Geodetic System 1984)，它的主要参数有：</p>
+        <h2 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1. 基本概念"></a>1. 基本概念</h2><h3 id="1-1-经纬度的描述"><a href="#1-1-经纬度的描述" class="headerlink" title="1-1. 经纬度的描述"></a>1-1. 经纬度的描述</h3><p>地球是一个椭球，Datum 是一组用于描述这个椭球的数据集合。最常用的一个 Datum 是 WGS84 (World Geodetic System 1984)，它的主要参数有：</p>
 <ul>
 <li>坐标系的原点是<strong>地球质心</strong>（center of mass）</li>
 <li><strong>子午线</strong>（meridian），即零度经线，位于格林威治子午线 Royal Observatory 所在纬度往东 102.5米 所对应的的经线圈</li>

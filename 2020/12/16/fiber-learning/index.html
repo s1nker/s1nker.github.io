@@ -5,12 +5,12 @@
   
   <title>React Fiber 浅析 | 小狒sin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="React Fiber 浅析 1. Background我们知道从广义上来讲，浏览器是单线程的，它将 GUI 描绘，时间器处理，事件处理，js 执行，远程资源加载统统放在一起。在 React 15 及之前的版本，React 在对组件进行更新时，如果需要渲染更新的组件过于庞大，js 执行就会长时间占据主线程，导致页面的响应变慢。当然 React 也提供了优化的手段（shouldComponentUp">
+  <meta name="description" content="1. Background我们知道从广义上来讲，浏览器是单线程的，它将 GUI 描绘，时间器处理，事件处理，js 执行，远程资源加载统统放在一起。在 React 15 及之前的版本，React 在对组件进行更新时，如果需要渲染更新的组件过于庞大，js 执行就会长时间占据主线程，导致页面的响应变慢。当然 React 也提供了优化的手段（shouldComponentUpdate），但是这种优化方式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="React Fiber 浅析">
 <meta property="og:url" content="http://yoursite.com/2020/12/16/fiber-learning/index.html">
 <meta property="og:site_name" content="小狒sin">
-<meta property="og:description" content="React Fiber 浅析 1. Background我们知道从广义上来讲，浏览器是单线程的，它将 GUI 描绘，时间器处理，事件处理，js 执行，远程资源加载统统放在一起。在 React 15 及之前的版本，React 在对组件进行更新时，如果需要渲染更新的组件过于庞大，js 执行就会长时间占据主线程，导致页面的响应变慢。当然 React 也提供了优化的手段（shouldComponentUp">
+<meta property="og:description" content="1. Background我们知道从广义上来讲，浏览器是单线程的，它将 GUI 描绘，时间器处理，事件处理，js 执行，远程资源加载统统放在一起。在 React 15 及之前的版本，React 在对组件进行更新时，如果需要渲染更新的组件过于庞大，js 执行就会长时间占据主线程，导致页面的响应变慢。当然 React 也提供了优化的手段（shouldComponentUpdate），但是这种优化方式">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://tva2.sinaimg.cn/large/6f4890d4gy1gml763tfnhj20rs0igdgy.jpg">
 <meta property="og:image" content="https://tva4.sinaimg.cn/large/6f4890d4gy1gml76ovdbnj218g0r6dlf.jpg">
@@ -18,7 +18,7 @@
 <meta property="og:image" content="https://tva3.sinaimg.cn/large/6f4890d4gy1gml775mk7lj20qy0kcgnt.jpg">
 <meta property="og:image" content="https://tvax2.sinaimg.cn/large/6f4890d4gy1gml78zehueg20lo0botn4.gif">
 <meta property="article:published_time" content="2020-12-15T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-01-13T02:03:30.327Z">
+<meta property="article:modified_time" content="2021-01-13T02:05:15.424Z">
 <meta property="article:author" content="Sinker">
 <meta property="article:tag" content="React">
 <meta property="article:tag" content="React fiber">
@@ -217,7 +217,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="React-Fiber-浅析"><a href="#React-Fiber-浅析" class="headerlink" title="React Fiber 浅析"></a>React Fiber 浅析</h1><p><img src="https://tva2.sinaimg.cn/large/6f4890d4gy1gml763tfnhj20rs0igdgy.jpg" alt="react-fiber"></p>
+        <p><img src="https://tva2.sinaimg.cn/large/6f4890d4gy1gml763tfnhj20rs0igdgy.jpg" alt="react-fiber"></p>
 <h2 id="1-Background"><a href="#1-Background" class="headerlink" title="1. Background"></a>1. Background</h2><p>我们知道从广义上来讲，浏览器是单线程的，它将 GUI 描绘，时间器处理，事件处理，js 执行，远程资源加载统统放在一起。在 React 15 及之前的版本，React 在对组件进行更新时，如果需要渲染更新的组件过于庞大，js 执行就会长时间占据主线程，导致页面的响应变慢。当然 React 也提供了优化的手段（<code>shouldComponentUpdate</code>），但是这种优化方式更多是依赖于使用者自身，这种单纯的人肉优化并没有很好地改善这种情况。</p>
 <h2 id="2-一些前置概念"><a href="#2-一些前置概念" class="headerlink" title="2. 一些前置概念"></a>2. 一些前置概念</h2><h3 id="2-1-Renderers（渲染器）和-Reconcilers（协调器）"><a href="#2-1-Renderers（渲染器）和-Reconcilers（协调器）" class="headerlink" title="2-1. Renderers（渲染器）和 Reconcilers（协调器）"></a>2-1. Renderers（渲染器）和 Reconcilers（协调器）</h3><p>React 最开始服务于 DOM，后来又有了支持原生平台的 React Native，为了区分开这两者，React 内部提出了“**渲染器 (Renderers)**”的概念。</p>
 <blockquote>
