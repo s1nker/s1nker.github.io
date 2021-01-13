@@ -197,7 +197,6 @@
       
         <h1 id="React-Fiber-浅析"><a href="#React-Fiber-浅析" class="headerlink" title="React Fiber 浅析"></a>React Fiber 浅析</h1><p><img src="https://tva2.sinaimg.cn/large/6f4890d4gy1gml763tfnhj20rs0igdgy.jpg" alt="react-fiber"></p>
 <h2 id="1-Background"><a href="#1-Background" class="headerlink" title="1. Background"></a>1. Background</h2><p>我们知道从广义上来讲，浏览器是单线程的，它将 GUI 描绘，时间器处理，事件处理，js 执行，远程资源加载统统放在一起。在 React 15 及之前的版本，React 在对组件进行更新时，如果需要渲染更新的组件过于庞大，js 执行就会长时间占据主线程，导致页面的响应变慢。当然 React 也提供了优化的手段（<code>shouldComponentUpdate</code>），但是这种优化方式更多是依赖于使用者自身，这种单纯的人肉优化并没有很好地改善这种情况。</p>
-<p><img src="https://tva2.sinaimg.cn/large/6f4890d4gy1gml763tfnhj20rs0igdgy.jpg" alt="react-fiber"></p>
 <h2 id="2-一些前置概念"><a href="#2-一些前置概念" class="headerlink" title="2. 一些前置概念"></a>2. 一些前置概念</h2><h3 id="2-1-Renderers（渲染器）和-Reconcilers（协调器）"><a href="#2-1-Renderers（渲染器）和-Reconcilers（协调器）" class="headerlink" title="2-1. Renderers（渲染器）和 Reconcilers（协调器）"></a>2-1. Renderers（渲染器）和 Reconcilers（协调器）</h3><p>React 最开始服务于 DOM，后来又有了支持原生平台的 React Native，为了区分开这两者，React 内部提出了“**渲染器 (Renderers)**”的概念。</p>
 <blockquote>
 <p>渲染器用于管理一棵 React 树，使其根据底层平台进行不同的调用。</p>
@@ -221,7 +220,7 @@
 <h3 id="2-3-Fiber-架构的目标"><a href="#2-3-Fiber-架构的目标" class="headerlink" title="2-3. Fiber 架构的目标"></a>2-3. Fiber 架构的目标</h3><p>上文已经提到，React 15 及更早的版本在更新组件时，会持续占用主线程，这样主线程上的布局、动画等周期性任务以及交互响应就无法立即得到处理，导致掉帧。Stack reconciler 是指 React 15 及更早的 reconciler 解决方案，它其实是自顶向下的递归 mount/update，这种自顶向下递归的方法在节点较多的时候会需要很长的处理时间。</p>
 <p><img src="https://tva4.sinaimg.cn/large/6f4890d4gy1gml76ovdbnj218g0r6dlf.jpg" alt="stack-reconciler"></p>
 <p>于是就<a target="_blank" rel="noopener" href="https://github.com/acdlite/react-fiber-architecture">有人提出来</a>，如果仅依靠浏览器自己去调用堆栈，它将一直工作到堆栈为空为止……如果我们能够随意中断堆栈的调用并手动操作堆栈帧，那不是很好吗？通过设置固定的时间分片，在每个分片内灵活地处理堆栈的任务，并且进行一次页面的渲染，这样就可以保证页面的刷新频率。</p>
-<p><img src="https://tvax4.sinaimg.cn/large/6f4890d4gy1gml76wg36uj20r80eyq7q.jpg" alt="fiber-reconciler"></p>
+<p><img src="https://tva1.sinaimg.cn/large/6f4890d4gy1gmlu89aaeej20r80eyq7q.jpg" alt="fiber-reconciler"></p>
 <p>但是除了需要对任务进行切片，还需要增加一个任务的优先级，因为对于用户体验来说，用户输入的响应事件要优先于请求填充内容，并且高优先级的任务可以打断低优先级的任务。</p>
 <p>Fiber 架构的主要目标是（后两个其实属于附带的目标）：</p>
 <ul>
