@@ -297,7 +297,8 @@
 </ol>
 <p>际上是1-6的工作循环，7是出口，工作循环每次只做一件事，做完看要不要喘口气。工作循环结束时， workInProgress tree 的根节点身上的 effect list 就是收集到的所有 side effect（因为每做完一个都向上归并）</p>
 <p>所以，构建 workInProgress tree 的过程就是 diff 的过程，通过 requestIdleCallback 来调度执行一组任务，每完成一个任务后回来看看有没有插队的（更紧急的），每完成一组任务，把时间控制权交还给主线程，直到下一次 requestIdleCallback 回调再继续构建 workInProgress tree</p>
-<h2 id="4-参考资料"><a href="#4-参考资料" class="headerlink" title="4. 参考资料"></a>4. 参考资料</h2><ol>
+<h2 id="4-参考资料"><a href="#4-参考资料" class="headerlink" title="4. 参考资料"></a>4. 参考资料</h2><blockquote>
+<ol>
 <li><a target="_blank" rel="noopener" href="https://indepth.dev/posts/1008/inside-fiber-in-depth-overview-of-the-new-reconciliation-algorithm-in-react">Inside Fiber: in-depth overview of the new reconciliation algorithm in React</a></li>
 <li><a target="_blank" rel="noopener" href="https://github.com/acdlite/react-fiber-architecture">React Fiber Architecture</a></li>
 <li><a target="_blank" rel="noopener" href="https://reactjs.org/docs/codebase-overview.html">Codebase Overview - React</a></li>
@@ -308,6 +309,7 @@
 <li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestAnimationFrame">window.requestAnimationFrame - Web API 接口参考 | MDN</a></li>
 <li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestIdleCallback">requestIdleCallback - Web API 接口参考 | MDN</a></li>
 </ol>
+</blockquote>
 
       
     </div>
